@@ -18,7 +18,6 @@ public class VersionIncrementor {
 	[PostProcessBuild]
 	public static void OnPostProcessBuild(BuildTarget target, string path) {
 		IncrementBuild();
-		LogUtils.Log("err");
 	}
 
 
@@ -31,7 +30,6 @@ public class VersionIncrementor {
 
 
 	static void RunOnce() {
-		LogUtils.LogPriority("Processing build");
 		EditorApplication.update -= RunOnce;
 		IncrementBuild();
 	}
@@ -54,7 +52,6 @@ public class VersionIncrementor {
 			}
 
 			versionText = majorVersion.ToString("0") + "." + minorVersion.ToString("000");
-			LogUtils.Log("Setting version: " + versionText);
 			PlayerSettings.bundleVersion = versionText;
 
 			float build = GetBuildNumber();
@@ -79,7 +76,6 @@ public class VersionIncrementor {
 			}
 
 			versionText = majorVersion.ToString("0") + "." + minorVersion.ToString("000");
-			LogUtils.Log("Setting version: " + versionText);
 			PlayerSettings.bundleVersion = versionText;
 
 			float build = GetBuildNumber();
