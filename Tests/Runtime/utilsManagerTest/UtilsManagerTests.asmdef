@@ -1,0 +1,6 @@
+{
+    "name": "UtilsManagerTests.asmdef",
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}
