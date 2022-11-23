@@ -102,13 +102,9 @@ public class VersionIncrementor {
 
 			File.WriteAllText(AssetDatabase.GetAssetPath(packageJson), json);
 			EditorUtility.SetDirty(packageJson);
-			LogUtils.Log("yeah we should've changed it");
 		}
 		BuildInfoData.Instance.SetVersionNumber(BuildInfoData.Instance.ParseVersionNumber(Application.version));
 		BuildInfoData.Instance.SetBuildNumber(BuildInfoData.Instance.ParseBuildNumber(PlayerSettings.iOS.buildNumber));
-		LogUtils.Log("Incremented build?");
-
-
 	}
 
 	private static float GetBuildNumber() {
