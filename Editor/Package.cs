@@ -29,6 +29,8 @@ public class Package {
 
 [Serializable]
 public class Dependencies {
+
+	
 }
 
 [Serializable]
