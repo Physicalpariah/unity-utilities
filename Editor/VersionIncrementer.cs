@@ -12,18 +12,16 @@ using UnityEditor.iOS.Xcode;
 #endif
 
 [InitializeOnLoad]
-public class VersionIncrementor
-{
+public class VersionIncrementor {
 
 	[PostProcessBuild]
-	public static void OnPostProcessBuild(BuildTarget target, string path)
-	{
+	public static void OnPostProcessBuild(BuildTarget target, string path) {
 		IncrementBuild();
+		LogUtils.Log("err");
 	}
 
 
-	static VersionIncrementor()
-	{
+	static VersionIncrementor() {
 		//If you want the scene to be fully loaded before your startup operation,
 		// for example to be able to use Object.FindObjectsOfType, you can defer your
 		// logic until the first editor update, like this:
@@ -31,29 +29,25 @@ public class VersionIncrementor
 	}
 
 
-	static void RunOnce()
-	{
+	static void RunOnce() {
 		LogUtils.LogPriority("Processing build");
 		EditorApplication.update -= RunOnce;
-		// IncrementBuild();
+		IncrementBuild();
 	}
 
 
-	public static void IncrementVersion()
-	{
+	public static void IncrementVersion() {
 
 		//1.4870
 		string versionText = PlayerSettings.bundleVersion;
-		if (!string.IsNullOrEmpty(versionText))
-		{
+		if (!string.IsNullOrEmpty(versionText)) {
 			string[] lines = versionText.Split('.');
 			int majorVersion = int.Parse(lines[0]);
 			int minorVersion = int.Parse(lines[1]);
 
 			minorVersion += 10;
 
-			if (minorVersion > 999)
-			{
+			if (minorVersion > 999) {
 				majorVersion++;
 				minorVersion = 0;
 			}
@@ -68,20 +62,17 @@ public class VersionIncrementor
 	}
 
 
-	public static void IncrementPatch()
-	{
+	public static void IncrementPatch() {
 
 		string versionText = PlayerSettings.bundleVersion;
-		if (!string.IsNullOrEmpty(versionText))
-		{
+		if (!string.IsNullOrEmpty(versionText)) {
 			string[] lines = versionText.Split('.');
 			int majorVersion = int.Parse(lines[0]);
 			int minorVersion = int.Parse(lines[1]);
 
 			minorVersion += 1;
 
-			if (minorVersion > 999)
-			{
+			if (minorVersion > 999) {
 				majorVersion++;
 				minorVersion = 0;
 			}
@@ -96,21 +87,19 @@ public class VersionIncrementor
 	}
 
 
-	public static void IncrementBuild()
-	{
+	public static void IncrementBuild() {
 		float build = GetBuildNumber();
 		build++;
 		SetBuildNumber(build);
 		BuildInfoData.Instance.SetVersionNumber(BuildInfoData.Instance.ParseVersionNumber(Application.version));
 		BuildInfoData.Instance.SetBuildNumber(BuildInfoData.Instance.ParseBuildNumber(PlayerSettings.iOS.buildNumber));
+		LogUtils.Log("Incremented build?");
 	}
 
-	private static float GetBuildNumber()
-	{
+	private static float GetBuildNumber() {
 		string buildText = PlayerSettings.iOS.buildNumber;
 
-		if (!string.IsNullOrEmpty(buildText))
-		{
+		if (!string.IsNullOrEmpty(buildText)) {
 			float count = float.Parse(buildText);
 			return count;
 		}
@@ -118,8 +107,7 @@ public class VersionIncrementor
 		return 0;
 	}
 
-	private static void SetBuildNumber(float count)
-	{
+	private static void SetBuildNumber(float count) {
 		PlayerSettings.macOS.buildNumber = count.ToString();
 		PlayerSettings.tvOS.buildNumber = count.ToString();
 		PlayerSettings.iOS.buildNumber = count.ToString();
