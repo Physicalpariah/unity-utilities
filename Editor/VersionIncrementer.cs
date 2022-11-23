@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
+
 #if UNITY_IPHONE
 using UnityEditor.iOS.Xcode;
 #endif
@@ -91,9 +92,23 @@ public class VersionIncrementor {
 		float build = GetBuildNumber();
 		build++;
 		SetBuildNumber(build);
+
+		if (BuildInfoData.Instance.m_incrementsPackage) {
+			TextAsset packageJson = (TextAsset)AssetDatabase.LoadAssetAtPath(BuildInfoData.Instance.m_packageJSONPath, typeof(TextAsset));
+			Package pack = JsonUtility.FromJson<Package>(packageJson.text);
+			pack.version = Application.version + "." + PlayerSettings.iOS.buildNumber;
+
+			string json = JsonUtility.ToJson(pack);
+
+			File.WriteAllText(AssetDatabase.GetAssetPath(packageJson), json);
+			EditorUtility.SetDirty(packageJson);
+			LogUtils.Log("yeah we should've changed it");
+		}
 		BuildInfoData.Instance.SetVersionNumber(BuildInfoData.Instance.ParseVersionNumber(Application.version));
 		BuildInfoData.Instance.SetBuildNumber(BuildInfoData.Instance.ParseBuildNumber(PlayerSettings.iOS.buildNumber));
 		LogUtils.Log("Incremented build?");
+
+
 	}
 
 	private static float GetBuildNumber() {

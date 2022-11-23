@@ -11,6 +11,8 @@ public class BuildInfoData : ScriptableObject {
 	// public string m_testParse;
 	public int m_currentBuild;
 	public float m_currentVersion;
+	public bool m_incrementsPackage = false;
+	public string m_packageJSONPath = "";
 
 	// Properties
 	private static BuildInfoData _instance = null;
