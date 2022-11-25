@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 
-[CreateAssetMenuAttribute(menuName = "anchorite/sceneTabs")]
+[CreateAssetMenuAttribute(menuName = "anchorite/utils/sceneTabs")]
 public class SceneTabObject : ScriptableObject {
 	public List<SceneAsset> m_scenes;
 }

@@ -10,7 +10,7 @@ public class SceneTabs : EditorWindow {
 	// Properties
 	private static SceneTabObject m_sceneTabs;
 	// Add menu named "My Window" to the Window menu
-	[MenuItem("Anchorite/SceneTab")]
+	[MenuItem("Anchorite/utils/SceneTab")]
 	static void Init() {
 		// Get existing open window or if none, make a new one:
 
