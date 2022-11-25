@@ -28,8 +28,7 @@ public static class AnchoriteEditorUtils {
 			GUIStyle headerStyle = new GUIStyle();
 			headerStyle.normal.textColor = Color.white;
 			headerStyle.alignment = TextAnchor.MiddleCenter;
-			headerStyle.fontStyle = FontStyle.Bold;
-			headerStyle.fontSize = 14;
+			headerStyle.fontSize = 12;
 			return headerStyle;
 		}
 
