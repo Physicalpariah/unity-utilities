@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 public class GuidGenerator {
-	[MenuItem("Anchorite/Utils/Generate Guid %g")]
+	[MenuItem("Anchorite/utils/Generate Guid %g")]
 	public static void CaptureScreen() {
 		string guid = Guid.NewGuid().ToString();
 		TextEditor te = new TextEditor();
