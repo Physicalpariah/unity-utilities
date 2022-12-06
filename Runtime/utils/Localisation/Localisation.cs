@@ -46,28 +46,28 @@ public class Localisation : ScriptableObject {
 
 	// Unity Callbacks
 
-	public void SetLanguage(SystemLanguage lang) {
-		m_currentLanguage = lang;
-		LoadDataFromCSV();
-		RaiseLanguageChanged();
+	public static void SetLanguage(SystemLanguage lang) {
+		_instance.m_currentLanguage = lang;
+		_instance.LoadDataFromCSV();
+		_instance.RaiseLanguageChanged();
 	}
 
 	// Public Functions
 
-	public string UseKey(string key) {
+	public static string UseKey(string key) {
 		Add(key);
 		return Get(key);
 	}
 
-	public void Add(string title) {
-		if (!m_data.Contains(title)) {
-			m_data.m_strings.Add(new LocalisationString(title));
+	public static void Add(string title) {
+		if (!_instance.m_data.Contains(title)) {
+			_instance.m_data.m_strings.Add(new LocalisationString(title));
 		}
 	}
 
-	public string Search(string key) {
-		for (int a = 0; a < Localisation.Instance.m_data.m_strings.Count; a++) {
-			LocalisationString data = Localisation.Instance.m_data.m_strings[a];
+	public static string Search(string key) {
+		for (int a = 0; a < _instance.m_data.m_strings.Count; a++) {
+			LocalisationString data = _instance.m_data.m_strings[a];
 			if (data.m_default.ToLower().Contains(key.ToLower())) {
 				return data.m_default;
 			}
@@ -76,12 +76,12 @@ public class Localisation : ScriptableObject {
 		return null;
 	}
 
-	public string Get(string key) {
-		if (m_data.Contains(key) == false) {
+	public static string Get(string key) {
+		if (_instance.m_data.Contains(key) == false) {
 			return null;
 		}
 
-		foreach (LocalisationString str in m_data.m_strings) {
+		foreach (LocalisationString str in _instance.m_data.m_strings) {
 			if (str.m_default.ToLower() == key.ToLower()) {
 				return str.m_current;
 			}
@@ -94,7 +94,6 @@ public class Localisation : ScriptableObject {
 
 
 	public void SaveToCSV() {
-
 		CreateFile(m_fullFilePath);
 		AppendToFile(m_fullFilePath, m_data.m_strings);
 	}

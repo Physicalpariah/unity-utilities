@@ -46,7 +46,7 @@ public class LocalisationStringsEditor : EditorWindow {
 		m_selectedLanguage = (SystemLanguage)val;
 
 		if (Localisation.Instance.m_currentLanguage != m_selectedLanguage) {
-			Localisation.Instance.SetLanguage(m_selectedLanguage);
+			Localisation.SetLanguage(m_selectedLanguage);
 		}
 
 
@@ -94,7 +94,7 @@ public class LocalisationStringsEditor : EditorWindow {
 			}
 			if (GUILayout.Button("Add New")) {
 				if (canAdd) {
-					Localisation.Instance.Add(m_searchTerm);
+					Localisation.Add(m_searchTerm);
 					Clear();
 				}
 			}

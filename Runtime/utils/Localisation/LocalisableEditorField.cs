@@ -51,7 +51,7 @@ public class LocalisableEditorField : PropertyDrawer {
 
 
 		if (string.IsNullOrWhiteSpace(value) == false) {
-			string suggestion = Localisation.Instance.Search(value);
+			string suggestion = Localisation.Search(value);
 			if (GUI.Button(labelRect, suggestion)) {
 				property.FindPropertyRelative("m_value").stringValue = suggestion;
 			}
@@ -64,7 +64,7 @@ public class LocalisableEditorField : PropertyDrawer {
 			if (!m_isSet) {
 				property.FindPropertyRelative("m_value").stringValue = "";
 			}
-			Localisation.Instance.Add(value);
+			Localisation.Add(value);
 		}
 
 
