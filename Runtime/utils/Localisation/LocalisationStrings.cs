@@ -21,8 +21,10 @@ public class LocalisationStrings {
 
 [Serializable]
 public class LocalisationString {
-	public string m_default;
-	public string m_current;
+	public string m_default = "";
+	public string m_current = "";
+
+	
 
 
 	public LocalisationString() { }
