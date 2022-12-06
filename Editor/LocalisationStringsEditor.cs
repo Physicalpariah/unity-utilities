@@ -45,8 +45,8 @@ public class LocalisationStringsEditor : EditorWindow {
 		int val = EditorGUILayout.Popup((int)m_selectedLanguage, Enum.GetNames(typeof(SystemLanguage)));
 		m_selectedLanguage = (SystemLanguage)val;
 
-		if (LocalisationStringsObject.Instance.m_currentLanguage != m_selectedLanguage) {
-			LocalisationStringsObject.Instance.SetLanguage(m_selectedLanguage);
+		if (Localisation.Instance.m_currentLanguage != m_selectedLanguage) {
+			Localisation.Instance.SetLanguage(m_selectedLanguage);
 		}
 
 
@@ -54,11 +54,11 @@ public class LocalisationStringsEditor : EditorWindow {
 		ShowEditor();
 
 		if (GUILayout.Button("Write to Disk")) {
-			LocalisationStringsObject.Instance.SaveToCSV();
+			Localisation.Instance.SaveToCSV();
 		}
 
 		if (GUILayout.Button("Load from Disk")) {
-			LocalisationStringsObject.Instance.LoadDataFromCSV();
+			Localisation.Instance.LoadDataFromCSV();
 		}
 	}
 
@@ -71,7 +71,7 @@ public class LocalisationStringsEditor : EditorWindow {
 		GUILayout.Label("Search:", GUILayout.Width(90));
 		m_searchTerm = GUILayout.TextField(m_searchTerm);
 		bool canAdd = true;
-		if (LocalisationStringsObject.Instance.m_data.Contains(m_searchTerm)) {
+		if (Localisation.Instance.m_data.Contains(m_searchTerm)) {
 			canAdd = false;
 		}
 
@@ -94,7 +94,7 @@ public class LocalisationStringsEditor : EditorWindow {
 			}
 			if (GUILayout.Button("Add New")) {
 				if (canAdd) {
-					LocalisationStringsObject.Instance.Add(m_searchTerm);
+					Localisation.Instance.Add(m_searchTerm);
 					Clear();
 				}
 			}
@@ -113,8 +113,8 @@ public class LocalisationStringsEditor : EditorWindow {
 		GUILayout.EndHorizontal();
 
 		m_scrollPos = GUILayout.BeginScrollView(m_scrollPos);
-		for (int a = 0; a < LocalisationStringsObject.Instance.m_data.m_strings.Count; a++) {
-			LocalisationString data = LocalisationStringsObject.Instance.m_data.m_strings[a];
+		for (int a = 0; a < Localisation.Instance.m_data.m_strings.Count; a++) {
+			LocalisationString data = Localisation.Instance.m_data.m_strings[a];
 			if (string.IsNullOrWhiteSpace(m_searchTerm)) {
 				DisplayStringsResult(data);
 			}
@@ -168,7 +168,7 @@ public class LocalisationStringsEditor : EditorWindow {
 
 
 		if (GUILayout.Button("X", GUILayout.Width(30))) {
-			LocalisationStringsObject.Instance.m_data.m_strings.Remove(data);
+			Localisation.Instance.m_data.m_strings.Remove(data);
 			Clear();
 		}
 		GUILayout.EndHorizontal();

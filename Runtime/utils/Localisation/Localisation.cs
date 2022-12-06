@@ -6,7 +6,7 @@ using System;
 using System.IO;
 
 [CreateAssetMenuAttribute(menuName = "anchorite/utils/Localisation Strings Object")]
-public class LocalisationStringsObject : ScriptableObject {
+public class Localisation : ScriptableObject {
 	// Properties
 	public LocalisationStrings m_data;
 	public SystemLanguage m_currentLanguage;
@@ -21,11 +21,11 @@ public class LocalisationStringsObject : ScriptableObject {
 		}
 	}
 
-	private static LocalisationStringsObject _instance = null;
-	public static LocalisationStringsObject Instance {
+	private static Localisation _instance = null;
+	public static Localisation Instance {
 		get {
 			if (_instance == null) {
-				_instance = Resources.Load("data/localisation/strings") as LocalisationStringsObject;
+				_instance = Resources.Load("data/localisation/strings") as Localisation;
 
 				if (_instance == null) {
 					Exception ex = new Exception("Whoa no localisation info, should be located at Resources/localisation/strings");
@@ -66,8 +66,8 @@ public class LocalisationStringsObject : ScriptableObject {
 	}
 
 	public string Search(string key) {
-		for (int a = 0; a < LocalisationStringsObject.Instance.m_data.m_strings.Count; a++) {
-			LocalisationString data = LocalisationStringsObject.Instance.m_data.m_strings[a];
+		for (int a = 0; a < Localisation.Instance.m_data.m_strings.Count; a++) {
+			LocalisationString data = Localisation.Instance.m_data.m_strings[a];
 			if (data.m_default.ToLower().Contains(key.ToLower())) {
 				return data.m_default;
 			}
@@ -190,7 +190,7 @@ public class LocalisationStringsObject : ScriptableObject {
 		// iterate through the existing localisation data and update it
 		if (loadedText.Count > 0) {
 			foreach (LocalisationString text in loadedText) {
-				foreach (LocalisationString obj in LocalisationStringsObject.Instance.m_data.m_strings) {
+				foreach (LocalisationString obj in Localisation.Instance.m_data.m_strings) {
 					if (obj.m_default == text.m_default) {
 						obj.m_current = text.m_current;
 					}

@@ -15,7 +15,7 @@ public class UI_LocalisationStringValidator : MonoBehaviour {
 
 	// Unity Callbacks
 	private void OnEnable() {
-		m_label.text = LocalisationStringsObject.Instance.UseKey(m_text.m_value);
+		m_label.text = Localisation.Instance.UseKey(m_text.m_value);
 	}
 
 	// Public Functions
