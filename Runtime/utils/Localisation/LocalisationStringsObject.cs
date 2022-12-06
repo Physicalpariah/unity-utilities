@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using System.IO;
 
-[CreateAssetMenuAttribute(menuName = "anchoriteutils/Localisation Strings Object")]
+[CreateAssetMenuAttribute(menuName = "anchorite/utils/Localisation Strings Object")]
 public class LocalisationStringsObject : ScriptableObject {
 	// Properties
 	public LocalisationStrings m_data;

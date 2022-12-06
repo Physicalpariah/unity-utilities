@@ -26,7 +26,7 @@ public class LocalisationStringsEditor : EditorWindow {
 	}
 
 	// Initalisation Functions
-	[MenuItem("Anchorite/anchoriteutils/Localisation Editor")]
+	[MenuItem("Anchorite/utils/Localisation Editor")]
 	static void Init() {
 		_window = (LocalisationStringsEditor)EditorWindow.GetWindow(typeof(LocalisationStringsEditor));
 	}
