@@ -44,6 +44,16 @@ public static class AnchoriteEditorUtils {
 
 	}
 
+	public static GUIStyle m_boldErrorStyle {
+		get {
+			GUIStyle headerStyle = new GUIStyle();
+			headerStyle.normal.textColor = Color.red;
+			headerStyle.fontStyle = FontStyle.Bold;
+			return headerStyle;
+		}
+
+	}
+
 	public static GUILayoutOption m_currentWidth {
 		get {
 			return GUILayout.Width(EditorGUIUtility.currentViewWidth);
