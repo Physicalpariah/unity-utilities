@@ -9,9 +9,17 @@ public class LocalisationStrings {
 	public List<LocalisationString> m_strings;
 
 	public bool Contains(string value) {
+		if (string.IsNullOrWhiteSpace(value)) {
+			return false;
+		}
+
 		foreach (LocalisationString str in m_strings) {
-			if (str.m_default.ToLower() == value.ToLower()) {
-				return true;
+			if (str != null) {
+				if (string.IsNullOrWhiteSpace(str.m_default) == false) {
+					if (str.m_default.ToLower() == value.ToLower()) {
+						return true;
+					}
+				}
 			}
 		}
 
@@ -24,7 +32,7 @@ public class LocalisationString {
 	public string m_default = "";
 	public string m_current = "";
 
-	
+
 
 
 	public LocalisationString() { }
