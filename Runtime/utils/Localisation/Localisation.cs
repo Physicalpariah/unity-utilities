@@ -163,7 +163,6 @@ public class Localisation : ScriptableObject {
 	public void LoadDataFromCSV() {
 		List<LocalisationString> loadedText = new List<LocalisationString>();
 
-
 		if (File.Exists(m_fullFilePath)) {
 			using (CsvReader reader = new CsvReader(m_fullFilePath)) {
 				// int row = 0;
@@ -188,13 +187,31 @@ public class Localisation : ScriptableObject {
 
 		// iterate through the existing localisation data and update it
 		if (loadedText.Count > 0) {
+			List<LocalisationString> newAssets = new List<LocalisationString>();
 			foreach (LocalisationString text in loadedText) {
+
+				bool contains = false;
 				foreach (LocalisationString obj in Localisation.Instance.m_data.m_strings) {
 					if (obj.m_default == text.m_default) {
 						obj.m_current = text.m_current;
+						contains = true;
+					}
+				}
+
+				if (!contains) {
+					if (string.IsNullOrWhiteSpace(text.m_default) == false) {
+						newAssets.Add(text);
 					}
 				}
 			}
+
+			foreach (LocalisationString str in newAssets) {
+				if (!loadedText.Contains(str)) {
+					loadedText.Add(str);
+				}
+			}
+
+			m_data.m_strings = loadedText;
 		}
 		else {
 			Debug.Log("Couldnt extract assets from file");
