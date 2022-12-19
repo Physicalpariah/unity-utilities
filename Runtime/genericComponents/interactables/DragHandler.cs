@@ -32,7 +32,7 @@ public class DragHandler : MonoBehaviour {
 	public static GameObject s_dragMarker { get; private set; }
 	private float m_tapTimer;
 
-	public static Vector3 m_screenSpace;
+	public Vector3 m_screenSpace;
 	public static Vector3 m_offset;
 
 	public LayerMask m_layerMask;
@@ -105,18 +105,28 @@ public class DragHandler : MonoBehaviour {
 			LetGo();
 		}
 		if (m_mouseStateDown) {
+			ScrollRotate();
 			Drag();
-			m_target.Rotate(Input.mouseScrollDelta.magnitude * m_scrollRotateSensitivity);
 		}
+
+
+
+
 
 		if (transform.position.y < -1) {
 			Reset();
 		}
 	}
 
+	private void ScrollRotate() {
+		if (m_target == null) { return; }
+		if (Input.mouseScrollDelta.y == 0) { return; }
+
+		m_target.Rotate(Input.mouseScrollDelta.y * m_scrollRotateSensitivity);
+	}
+
 	private void Acquire() {
-		RaycastHit hitInfo;
-		GameObject target = ObjectUtils.GetClickedObject(out hitInfo, LayerMask.NameToLayer("interact"));
+		GameObject target = ObjectUtils.GetClickedObject(out RaycastHit hitInfo, LayerMask.NameToLayer("interact"));
 
 		if (hitInfo.collider == null) { return; }
 

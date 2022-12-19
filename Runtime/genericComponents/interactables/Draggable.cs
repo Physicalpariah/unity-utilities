@@ -12,6 +12,7 @@ public class Draggable : MonoBehaviour {
 	private bool m_canDrag = true;
 	public bool m_willReset = false;
 	public bool m_propelsDownward;
+	[SerializeField] private float m_rotation;
 	[SerializeField] private bool m_forcesPositionOnLetGo = false;
 	[SerializeField] private bool m_dropsWithPhysics = true;
 
@@ -78,7 +79,7 @@ public class Draggable : MonoBehaviour {
 
 		if (m_rotating) {
 			ApplyRotation();
-			return;
+			// return;
 		}
 		if (m_forcesPositionOnLetGo) {
 			Vector3 pos = transform.position;
@@ -93,10 +94,14 @@ public class Draggable : MonoBehaviour {
 	public virtual void Rotate(float angle) {
 		if (angle == 0) { return; }
 		m_rotating = true;
+
+		m_rotation += angle;
+		transform.rotation = Quaternion.Euler(0, m_rotation, 0);
 	}
 
 	public virtual void ApplyRotation() {
 		m_rotating = false;
+		transform.rotation = Quaternion.Euler(0, m_rotation, 0);
 	}
 
 
