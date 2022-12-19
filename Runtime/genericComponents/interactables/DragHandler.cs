@@ -25,6 +25,7 @@ public class DragHandler : MonoBehaviour {
 	}
 
 	private Draggable m_target;
+	public float m_scrollRotateSensitivity = 1.0f;
 	public bool m_mouseStateDown { get; private set; }
 	public static bool m_dragging { get; private set; }
 	private bool m_hasBeenTapped = false;
@@ -105,6 +106,7 @@ public class DragHandler : MonoBehaviour {
 		}
 		if (m_mouseStateDown) {
 			Drag();
+			m_target.Rotate(Input.mouseScrollDelta.magnitude * m_scrollRotateSensitivity);
 		}
 
 		if (transform.position.y < -1) {
