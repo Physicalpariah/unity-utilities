@@ -16,11 +16,22 @@ public class Draggable : MonoBehaviour {
 	[SerializeField] private bool m_forcesPositionOnLetGo = false;
 	[SerializeField] private bool m_dropsWithPhysics = true;
 
+	public Action e_pickedUp;
+	private void RaisePickedUp() {
+		e_pickedUp?.Invoke();
+	}
+
+	public Action e_dropped;
+	private void RaiseDropped() {
+		e_dropped?.Invoke();
+	}
+
 	// Initalisation Functions
 
 	// Unity Callbacks
 	public virtual void PickUp() {
 		m_pickedUp = true;
+		RaisePickedUp();
 	}
 
 	public virtual bool VerifyCanPickup() {
@@ -88,6 +99,8 @@ public class Draggable : MonoBehaviour {
 		}
 
 		m_pickedUp = false;
+
+		RaiseDropped();
 	}
 
 

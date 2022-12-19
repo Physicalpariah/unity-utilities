@@ -24,6 +24,7 @@ public class ScreenSpaceIconHandler : MonoBehaviour {
 
 	public static void SetInstance(ScreenSpaceIconHandler instance) {
 		m_instance = instance;
+		m_instance.Clear();
 	}
 
 	public static void ClearInstance() {

@@ -4,10 +4,6 @@ using UnityEditor;
 using UnityEngine;
 using System;
 
-[Serializable]
-public class LocalisableField {
-	public string m_value;
-}
 
 
 [CustomPropertyDrawer(typeof(LocalisableField))
