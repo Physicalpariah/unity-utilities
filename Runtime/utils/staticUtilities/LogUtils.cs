@@ -60,7 +60,6 @@ public static class LogUtils {
 
 	public static void LogNotImplemented(object log = null, bool check = true) {
 		if (check) {
-
 			Debug.LogError("Function not yet Implemented: " + log);
 		}
 	}
