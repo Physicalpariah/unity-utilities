@@ -35,9 +35,9 @@ public class SceneTabs : EditorWindow {
 			string filePath = "Assets/Resources/" + m_filePath + m_fileName + ".asset";
 
 			string dirPath = Application.dataPath + "/Resources/" + m_filePath;
-			LogUtils.Log("Checking dir at path:" + dirPath);
+			// LogUtils.Log("Checking dir at path:" + dirPath);
 			if (!Directory.Exists(dirPath)) {
-				LogUtils.Log("Creating directory at:" + dirPath);
+				// LogUtils.Log("Creating directory at:" + dirPath);
 				Directory.CreateDirectory(dirPath);
 				AssetDatabase.Refresh();
 			}
@@ -74,10 +74,10 @@ public class SceneTabs : EditorWindow {
 					EditorSceneManager.OpenScene(path);
 				}
 				var rect = GUILayoutUtility.GetLastRect();
-				LogUtils.Log(rect.GetType());
+				// LogUtils.Log(rect.GetType());
 
 				width += scene.name.Length * 24; // TODO: Magic number yo.
-				LogUtils.Log("Screen width: " + Screen.width + " rect Width: " + rect.width + " total width: " + width);
+				// LogUtils.Log("Screen width: " + Screen.width + " rect Width: " + rect.width + " total width: " + width);
 
 				if (width > Screen.width) {
 					width = 0;
