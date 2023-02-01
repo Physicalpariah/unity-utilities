@@ -36,7 +36,13 @@ public class ObjectUtils {
 
 	public static GameObject GetClickedObject(out RaycastHit hit, LayerMask mask) {
 		GameObject target = null;
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		Vector3 pos = Input.mousePosition;
+		if (Input.touchCount > 0)
+		{
+			pos = Input.touches[0].position;
+		}
+		Ray ray = Camera.main.ScreenPointToRay(pos);
 		if (Physics.Raycast(ray.origin, ray.direction * 10, out hit, 99999, mask)) {
 			target = hit.collider.gameObject;
 		}
