@@ -39,7 +39,7 @@ public class RecycleablePrefabContainer {
 
 		// 2.1) if we've maxed out spawns, and we care about balance, and there's no inactive items, and we haven't yet got an item, we're in trouble.
 		if (m_rawSpawns >= m_maxSpawns + 1) {
-			if (m_spawnedItems[0].m_caresAboutInitBalance) {
+			if (m_spawnedItems[0].m_recycleData.m_caresAboutInitBalance) {
 				Debug.LogError("no inactive items for prefab:" + prefab.name);
 			}
 		}
@@ -110,7 +110,7 @@ public class RecycleablePrefabContainer {
 		ObjectRecycler.Instance.IncrementRecycleablesCount();
 		recyclable.SetUniqueID(ObjectRecycler.Instance.m_recycleCount);
 		m_rawSpawns++;
-		if (recyclable.m_caresAboutInitBalance) {
+		if (recyclable.m_recycleData.m_caresAboutInitBalance) {
 			if (m_rawSpawns >= m_maxSpawns + 1) {
 				LogUtils.LogError($"Whoa there pardner,{newItem.name} has exceeded max spawns!, this is highly illegal.");
 			}
