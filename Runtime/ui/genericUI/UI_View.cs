@@ -38,6 +38,10 @@ public class UI_View : MonoBehaviour {
 		Initialise(controller);
 	}
 
+	public virtual void InjectDependencies(List<object> data) {
+
+	}
+
 	public virtual void ShutDown() {
 
 	}
