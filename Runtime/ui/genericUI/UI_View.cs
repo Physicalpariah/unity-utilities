@@ -22,6 +22,10 @@ public class UI_View {
 		m_controller = controller;
 	}
 
+	public virtual void Initialise(UI_ViewController controller, List<object> dependencies, object data) {
+		Initialise(controller);
+	}
+
 	public virtual void Initialise(UI_ViewController controller, object data) {
 		Initialise(controller);
 	}

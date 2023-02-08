@@ -50,6 +50,8 @@ public class UI_ViewManager : MonoBehaviour {
 	public void Initialise() {
 		CollectEventSystem();
 
+		InitialiseViews();
+
 		if (m_closesAllOnOpen) {
 			foreach (UI_ViewController ctrl in m_viewControllers) {
 				if (ctrl != m_firstOpened) {
@@ -61,6 +63,10 @@ public class UI_ViewManager : MonoBehaviour {
 		if (m_firstOpened != null) {
 			m_firstOpened.Open();
 		}
+	}
+
+	public virtual void InitialiseViews() {
+
 	}
 
 	private void CollectEventSystem() {
