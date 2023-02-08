@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class UI_View {
+public class UI_View : MonoBehaviour {
 	// Properties
 
 	[SerializeField] protected GameObject m_viewRoot;
