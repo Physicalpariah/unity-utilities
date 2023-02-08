@@ -20,6 +20,10 @@ public class UI_View : MonoBehaviour {
 			LogUtils.LogError("No controller detected");
 		}
 		m_controller = controller;
+
+		if (m_viewRoot == null) {
+			m_viewRoot = gameObject;
+		}
 	}
 
 	public virtual void Initialise(UI_ViewController controller, List<object> dependencies) {
