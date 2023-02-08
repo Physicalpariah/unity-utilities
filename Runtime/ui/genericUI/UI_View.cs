@@ -24,14 +24,17 @@ public class UI_View : MonoBehaviour {
 		if (m_viewRoot == null) {
 			m_viewRoot = gameObject;
 		}
+
 	}
 
 	public virtual void Initialise(UI_ViewController controller, List<object> dependencies) {
 		Initialise(controller);
+		InjectDependencies(dependencies);
 	}
 
 	public virtual void Initialise(UI_ViewController controller, List<object> dependencies, object data) {
 		Initialise(controller);
+		InjectDependencies(dependencies);
 	}
 
 	public virtual void Initialise(UI_ViewController controller, object data) {
