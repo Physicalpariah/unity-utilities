@@ -25,7 +25,7 @@ public static class LogUtils {
 	public static void LogPriority(object log, bool check = true) {
 		// if (Application.platform == RuntimePlatform.OSXEditor) {
 		if (check) {
-			Debug.Log("<color=#00BDF7>" + log + "</color>");
+			Debug.Log("Priority: <color=#00BDF7>" + log + "</color>");
 		}
 		// }
 	}
@@ -33,7 +33,7 @@ public static class LogUtils {
 	public static void LogIssue(object log, bool check = true) {
 		// if (Application.platform == RuntimePlatform.OSXEditor) {
 		if (check) {
-			Debug.Log("<color=#C13F3F>" + log + "</color>");
+			Debug.Log("Issue: <color=#C13F3F>" + log + "</color>");
 		}
 		// }
 	}
@@ -41,7 +41,7 @@ public static class LogUtils {
 	public static void LogTodo(object log, bool check = true) {
 		// if (Application.platform == RuntimePlatform.OSXEditor) {
 		if (check) {
-			Debug.Log("<color=#FF00B1>" + log + "</color>");
+			Debug.Log("TODO: <color=#FF00B1>" + log + "</color>");
 		}
 		// }
 	}
