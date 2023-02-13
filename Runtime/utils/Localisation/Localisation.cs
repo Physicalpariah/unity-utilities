@@ -2,6 +2,9 @@
 //  Copyright (c) 2022 Matt Purchase. All rights reserved.
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using System;
 using System.IO;
 
@@ -212,6 +215,12 @@ public class Localisation : ScriptableObject {
 			}
 
 			m_data.m_strings = loadedText;
+
+
+#if UNITY_EDITOR
+			EditorUtility.SetDirty(Instance);
+#endif
+
 		}
 		else {
 			Debug.Log("Couldnt extract assets from file");
