@@ -37,7 +37,7 @@ public static class UIUtils {
 
 		dropdown.AddOptions(dropdownOptions);
 		dropdown.onValueChanged.RemoveAllListeners();
-		
+
 		dropdown.RefreshShownValue();
 		dropdown.onValueChanged.AddListener(action);
 	}
@@ -68,11 +68,23 @@ public static class UIUtils {
 		if (EventSystem.current.IsPointerOverGameObject(-1)) {
 			return true;
 		}
+
+		if (IsPointerOverUIObject()) {
+			return true;
+		}
 		// if (EventSystem.current.currentSelectedGameObject != null) {
 		// 	return true;
 		// }
 
 		return false;
+	}
+
+	private static bool IsPointerOverUIObject() {
+		PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+		eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+		List<RaycastResult> results = new List<RaycastResult>();
+		EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+		return results.Count > 0;
 	}
 
 }
