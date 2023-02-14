@@ -38,8 +38,7 @@ public class ObjectUtils {
 		GameObject target = null;
 
 		Vector3 pos = Input.mousePosition;
-		if (Input.touchCount > 0)
-		{
+		if (Input.touchCount > 0) {
 			pos = Input.touches[0].position;
 		}
 		Ray ray = Camera.main.ScreenPointToRay(pos);
@@ -91,6 +90,26 @@ public class ObjectUtils {
 	public static void SetPosAndRot(GameObject spawnedItem, Vector3 pos, Quaternion rotation) {
 		spawnedItem.transform.position = pos;
 		spawnedItem.transform.rotation = rotation;
+	}
+
+	public static Vector3[] GetColliderVertexPositions(Collider col) {
+		var vertices = new Vector3[8];
+		var thisMatrix = col.transform.localToWorldMatrix;
+		var storedRotation = col.transform.rotation;
+		col.transform.rotation = Quaternion.identity;
+
+		var extents = col.bounds.extents;
+		vertices[0] = thisMatrix.MultiplyPoint3x4(extents);
+		vertices[1] = thisMatrix.MultiplyPoint3x4(new Vector3(-extents.x, extents.y, extents.z));
+		vertices[2] = thisMatrix.MultiplyPoint3x4(new Vector3(extents.x, extents.y, -extents.z));
+		vertices[3] = thisMatrix.MultiplyPoint3x4(new Vector3(-extents.x, extents.y, -extents.z));
+		vertices[4] = thisMatrix.MultiplyPoint3x4(new Vector3(extents.x, -extents.y, extents.z));
+		vertices[5] = thisMatrix.MultiplyPoint3x4(new Vector3(-extents.x, -extents.y, extents.z));
+		vertices[6] = thisMatrix.MultiplyPoint3x4(new Vector3(extents.x, -extents.y, -extents.z));
+		vertices[7] = thisMatrix.MultiplyPoint3x4(-extents);
+
+		col.transform.rotation = storedRotation;
+		return vertices;
 	}
 
 }
