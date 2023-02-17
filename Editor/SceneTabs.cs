@@ -77,11 +77,10 @@ public class SceneTabs : EditorWindow {
 				// LogUtils.Log(rect.GetType());
 
 				width += scene.name.Length * 24; // TODO: Magic number yo.
-				// LogUtils.Log("Screen width: " + Screen.width + " rect Width: " + rect.width + " total width: " + width);
+												 // LogUtils.Log("Screen width: " + Screen.width + " rect Width: " + rect.width + " total width: " + width);
 
 				if (width > Screen.width) {
 					width = 0;
-					LogUtils.Log("New line!");
 					GUILayout.EndHorizontal();
 					GUILayout.BeginHorizontal();
 				}
