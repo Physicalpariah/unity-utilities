@@ -74,7 +74,7 @@ public static class LogUtils
         Debug.LogError(AssembleLog("Not Implemented", "", log));
     }
 
-    public static string AssembleLog(string logtype, string color, string log)
+    public static string AssembleLog(string logtype, string color, object log)
     {
         string logPrefix = "-LOG:" + logtype;
         string logSuffix = "";
