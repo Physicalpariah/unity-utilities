@@ -25,14 +25,14 @@ public static class LogUtils
     {
         if (!m_doesBasicLog) { return; }
         if (!check) { return; }
-        Debug.Log(log);
+        Debug.Log("-LOG:" + log);
     }
 
     public static void LogPriority(object log, bool check = true)
     {
         if (!m_doesPriorityLog) { return; }
         if (!check) { return; }
-        Debug.Log("LOGPriority: <color=#00BDF7>" + log + "</color>");
+        Debug.Log("-LOG:Priority: <color=#00BDF7>" + log + "</color>");
 
     }
 
@@ -40,7 +40,7 @@ public static class LogUtils
     {
         if (!m_doesIssueLog) { return; }
         if (!check) { return; }
-        Debug.Log("LOGIssue: <color=#C13F3F>" + log + "</color>");
+        Debug.Log("-LOG:Issue: <color=#C13F3F>" + log + "</color>");
 
     }
 
@@ -48,7 +48,7 @@ public static class LogUtils
     {
         if (!m_doesTODOLog) { return; }
         if (!check) { return; }
-        Debug.Log("LOGTODO: <color=#FF00B1>" + log + "</color>");
+        Debug.Log("-LOG:Todo <color=#FF00B1>" + log + "</color>");
 
     }
 
