@@ -53,6 +53,14 @@ public static class LogUtils
 
     }
 
+    public static void LogImportant(object log, bool check = true)
+    {
+        if (!m_doesTODOLog) { return; }
+        if (!check) { return; }
+        Debug.Log(AssembleLog("IMPORTANT:", "#B5FFFE", log));
+        Debug.Break();
+    }
+
     public static void LogWarning(object log, bool check = true)
     {
         if (!m_doesWarningLog) { return; }
