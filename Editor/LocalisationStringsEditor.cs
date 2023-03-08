@@ -67,7 +67,7 @@ public class LocalisationStringsEditor : EditorWindow {
 		}
 	}
 
-	private void ShowEditor() {
+	private static void ShowEditor() {
 
 
 		AnchoriteEditorUtils.DrawUILine(Color.black);
@@ -136,7 +136,7 @@ public class LocalisationStringsEditor : EditorWindow {
 		AnchoriteEditorUtils.DrawUILine(Color.black);
 	}
 
-	private void DisplayEditButton() {
+	private static void DisplayEditButton() {
 		string editKey = "Edit Data";
 		if (m_editsKeys) {
 			editKey = "Stop Editing Data";
@@ -147,7 +147,7 @@ public class LocalisationStringsEditor : EditorWindow {
 		}
 	}
 
-	private void DisplayStringsResult(LocalisationString data) {
+	private static void DisplayStringsResult(LocalisationString data) {
 		GUILayout.BeginHorizontal();
 
 
@@ -179,7 +179,7 @@ public class LocalisationStringsEditor : EditorWindow {
 		GUILayout.EndHorizontal();
 	}
 
-	private void Clear() {
+	private static void Clear() {
 		m_searchTerm = "";
 	}
 
