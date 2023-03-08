@@ -56,10 +56,10 @@ public class SceneTabs : EditorWindow {
 	}
 
 	private void OnGUI() {
-		SceneTabs.OnGUI();
+		SceneTabs.DrawGUI();
 	}
 
-	public static void OnGUI() {
+	public static void DrawGUI() {
 
 		if (m_sceneTabs == null) {
 			UpdateSceneTabObject();
