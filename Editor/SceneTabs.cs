@@ -55,7 +55,11 @@ public class SceneTabs : EditorWindow {
 		}
 	}
 
-	void OnGUI() {
+	private void OnGUI() {
+		SceneTabs.OnGUI();
+	}
+
+	public static void OnGUI() {
 
 		if (m_sceneTabs == null) {
 			UpdateSceneTabObject();
