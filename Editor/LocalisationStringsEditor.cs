@@ -9,11 +9,11 @@ using UnityEngine;
 public class LocalisationStringsEditor : EditorWindow {
 	// Properties
 	private static LocalisationStringsEditor _window;
-	private Vector2 m_scrollPos;
-	private string m_searchTerm;
-	private SystemLanguage m_selectedLanguage = SystemLanguage.English;
+	private static Vector2 m_scrollPos;
+	private static string m_searchTerm;
+	private static SystemLanguage m_selectedLanguage = SystemLanguage.English;
 
-	public bool m_editsKeys = false;
+	public static bool m_editsKeys = false;
 
 	private static LocalisationStringsEditor s_window {
 		get {
@@ -32,7 +32,12 @@ public class LocalisationStringsEditor : EditorWindow {
 	}
 
 	// Unity Callbacks
+
 	private void OnGUI() {
+		DrawGUI();
+	}
+
+	public static void DrawGUI() {
 		GUILayout.Label("Localisation:");
 
 
