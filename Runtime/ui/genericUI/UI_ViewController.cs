@@ -257,6 +257,11 @@ public class UI_ViewController : MonoBehaviour {
 			return;
 		}
 
+		if (UI_ViewManager.Instance.m_eventSystem == null) {
+			return;
+		}
+
+
 		if (UI_ViewManager.Instance.m_eventSystem.currentSelectedGameObject == null) {
 			SetFirstSelected();
 			return;
