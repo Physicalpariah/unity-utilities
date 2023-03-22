@@ -151,13 +151,9 @@ public class LocalisationStringsEditor : EditorWindow {
 	private static void DisplayStringsResult(LocalisationString data) {
 		GUILayout.BeginHorizontal();
 
-
 		if (m_selectedLanguage != SystemLanguage.English) {
 			m_editsKeys = false;
 		}
-
-
-
 
 		if (m_editsKeys) {
 			data.m_default = GUILayout.TextField(data.m_default, m_width);
@@ -176,7 +172,7 @@ public class LocalisationStringsEditor : EditorWindow {
 		data.m_comment = GUILayout.TextField(data.m_comment, m_width);
 
 
-		if (GUILayout.Button("X", GUILayout.Width(30))) {
+		if (GUILayout.Button("-", GUILayout.Width(30))) {
 			Localisation.Instance.m_data.m_strings.Remove(data);
 			Clear();
 		}

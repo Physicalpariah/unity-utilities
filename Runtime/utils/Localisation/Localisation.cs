@@ -82,6 +82,19 @@ public class Localisation : ScriptableObject {
 		return null;
 	}
 
+
+	public static List<string> SearchList(string key) {
+		List<string> results = new();
+		for (int a = 0; a < Instance.m_data.m_strings.Count; a++) {
+			LocalisationString data = Instance.m_data.m_strings[a];
+			if (data.m_default.ToLower().Contains(key.ToLower())) {
+				results.Add(data.m_default);
+			}
+		}
+
+		return results;
+	}
+
 	public static string Get(string key) {
 		if (Instance.m_data.Contains(key) == false) {
 #if UNITY_EDITOR
@@ -155,13 +168,6 @@ public class Localisation : ScriptableObject {
 		using (StreamWriter sw = File.CreateText(path)) {
 
 			string finalString = "";
-			for (int i = 0; i < headers.Count; i++) {
-				if (finalString != "") {
-					finalString += ",";
-				}
-				finalString += headers[i];
-			}
-			finalString += ",";
 			sw.WriteLine(finalString);
 		}
 	}
@@ -178,9 +184,13 @@ public class Localisation : ScriptableObject {
 
 					// read columns
 					if (values.Length > 1) {
-						text.m_default = values[0];
-						text.m_current = values[1];
-						text.m_comment = values[2];
+						if (!string.IsNullOrWhiteSpace(values[0])) {
+							text.m_default = values[0];
+							text.m_current = values[1];
+							if (values.Length > 2) {
+								text.m_comment = values[2];
+							}
+						}
 					}
 
 					// save to LocalisableText
@@ -189,7 +199,14 @@ public class Localisation : ScriptableObject {
 			}
 		}
 		else {
-			Debug.Log("No file found");
+			if (Application.platform == RuntimePlatform.OSXEditor) {
+				LogUtils.LogPriority("No file found, creating localisation store for: " + m_currentLanguage);
+				foreach (LocalisationString str in Instance.m_data.m_strings) {
+					str.m_current = "";
+				}
+				SaveToCSV();
+			}
+
 			return;
 		}
 

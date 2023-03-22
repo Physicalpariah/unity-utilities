@@ -3,6 +3,7 @@
 using UnityEditor;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 
 
@@ -10,8 +11,9 @@ using System;
 ]
 public class LocalisableEditorField : PropertyDrawer {
 
-	private string m_lastValue;
-	private bool m_isSet = false;
+	public string m_lastValue;
+	public bool m_isSet = false;
+	private bool m_initialCheck = false;
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 		// Using BeginProperty / EndProperty on the parent property means that
@@ -33,7 +35,12 @@ public class LocalisableEditorField : PropertyDrawer {
 
 		string value = property.FindPropertyRelative("m_value").stringValue;
 		// Draw fields - passs GUIContent.none to each so they are drawn without labels
-		// m_isSet = LocalisationStringsObject.Instance.m_data.Contains(value);
+		if (!m_initialCheck) {
+			m_isSet = Localisation.Instance.m_data.Contains(value);
+			m_initialCheck = true;
+		}
+
+
 
 		if (!m_isSet) {
 			EditorGUI.PropertyField(baseValueRect, property.FindPropertyRelative("m_value"), GUIContent.none);
@@ -46,21 +53,37 @@ public class LocalisableEditorField : PropertyDrawer {
 		}
 
 
-		if (string.IsNullOrWhiteSpace(value) == false) {
-			string suggestion = Localisation.Search(value);
-			if (GUI.Button(labelRect, suggestion)) {
-				property.FindPropertyRelative("m_value").stringValue = suggestion;
+
+
+
+		if (!m_isSet) {
+
+			if (string.IsNullOrWhiteSpace(value) == false) {
+				List<string> suggestions = Localisation.SearchList(value);
+
+
+				int selected = 0;
+
+				EditorGUI.BeginChangeCheck();
+				selected = EditorGUI.Popup(labelRect, selected, suggestions.ToArray());
+				if (EditorGUI.EndChangeCheck()) {
+					property.FindPropertyRelative("m_value").stringValue = suggestions[selected];
+					m_isSet = true;
+				}
+				// if (GUI.Button(labelRect, suggestion)) {
+				// 	property.FindPropertyRelative("m_value").stringValue = suggestion;
+				// }
 			}
 		}
 
+		string buttonTitle = "+";
+		if (m_isSet) {
+			buttonTitle = "-";
+		}
 
-		if (GUI.Button(buttonRect, "D")) {
-			m_isSet = !m_isSet;
 
-			if (!m_isSet) {
-				property.FindPropertyRelative("m_value").stringValue = "";
-			}
-			Localisation.Add(value);
+		if (GUI.Button(buttonRect, buttonTitle)) {
+			ConfirmValue(property, value);
 		}
 
 
@@ -69,5 +92,16 @@ public class LocalisableEditorField : PropertyDrawer {
 		EditorGUI.indentLevel = indent;
 
 		EditorGUI.EndProperty();
+	}
+
+	private void ConfirmValue(SerializedProperty property, string value) {
+		m_isSet = !m_isSet;
+
+		if (!m_isSet) {
+			property.FindPropertyRelative("m_value").stringValue = "";
+		}
+		else {
+			Localisation.Add(value);
+		}
 	}
 }
