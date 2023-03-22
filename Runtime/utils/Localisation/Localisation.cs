@@ -120,6 +120,7 @@ public class Localisation : ScriptableObject {
 			List<string> cols = new List<string>();
 			cols.Add("\"" + text.m_default + "\"");
 			cols.Add("\"" + text.m_current + "\"");
+			cols.Add("\"" + text.m_comment + "\"");
 			rows.Add(cols);
 		}
 
@@ -179,6 +180,7 @@ public class Localisation : ScriptableObject {
 					if (values.Length > 1) {
 						text.m_default = values[0];
 						text.m_current = values[1];
+						text.m_comment = values[2];
 					}
 
 					// save to LocalisableText

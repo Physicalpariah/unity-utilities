@@ -113,8 +113,9 @@ public class LocalisationStringsEditor : EditorWindow {
 
 
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Key", GUILayout.Width((Screen.width / 4) - 30)); // AnchoriteEditorUtils.m_boldStyle]
-		GUILayout.Label("Current Value", GUILayout.Width((Screen.width / 4) - 30));
+		GUILayout.Label("Key", m_width); // AnchoriteEditorUtils.m_boldStyle]
+		GUILayout.Label("Current Value", m_width);
+		GUILayout.Label("Comment", m_width);
 		GUILayout.EndHorizontal();
 
 		m_scrollPos = GUILayout.BeginScrollView(m_scrollPos);
@@ -157,19 +158,22 @@ public class LocalisationStringsEditor : EditorWindow {
 
 
 
+
 		if (m_editsKeys) {
-			data.m_default = GUILayout.TextField(data.m_default, GUILayout.Width((Screen.width / 4) - 30));
+			data.m_default = GUILayout.TextField(data.m_default, m_width);
 		}
 		else {
-			GUILayout.Label(data.m_default, GUILayout.Width((Screen.width / 4) - 30));
+			GUILayout.Label(data.m_default, m_width);
 		}
 
 		if (m_editsKeys) {
-			data.m_current = GUILayout.TextField(data.m_current, GUILayout.Width((Screen.width / 4) - 30));
+			data.m_current = GUILayout.TextField(data.m_current, m_width);
 		}
 		else {
-			GUILayout.Label(data.m_current, GUILayout.Width((Screen.width / 4) - 30));
+			GUILayout.Label(data.m_current, m_width);
 		}
+
+		data.m_comment = GUILayout.TextField(data.m_comment, m_width);
 
 
 		if (GUILayout.Button("X", GUILayout.Width(30))) {
@@ -177,6 +181,13 @@ public class LocalisationStringsEditor : EditorWindow {
 			Clear();
 		}
 		GUILayout.EndHorizontal();
+	}
+
+	private static GUILayoutOption m_width {
+		get {
+			float w = (Screen.width / 5) - 60;
+			return GUILayout.Width(w);
+		}
 	}
 
 	private static void Clear() {

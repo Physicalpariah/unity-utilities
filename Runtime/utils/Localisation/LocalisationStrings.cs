@@ -32,10 +32,7 @@ public class LocalisationStrings {
 public class LocalisationString {
 	public string m_default = "";
 	public string m_current = "";
-
-
-
-
+	public string m_comment = "";
 	public LocalisationString() { }
 	public LocalisationString(string line) {
 		m_default = line;
