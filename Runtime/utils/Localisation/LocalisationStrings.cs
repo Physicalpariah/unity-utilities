@@ -2,6 +2,7 @@
 //  Copyright (c) 2022 Matt Purchase. All rights reserved.
 using System.Collections.Generic;
 using System;
+using UnityEngine;
 
 [Serializable]
 public class LocalisationStrings {

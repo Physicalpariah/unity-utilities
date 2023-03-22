@@ -29,9 +29,8 @@ public class Localisation : ScriptableObject {
 		get {
 			if (_instance == null) {
 				_instance = Resources.Load("data/localisation/strings") as Localisation;
-
 				if (_instance == null) {
-					Exception ex = new Exception("Whoa no localisation info, should be located at Resources/localisation/strings");
+					Exception ex = new Exception("Whoa no localisation info, should be located at Resources/data/localisation/strings");
 					Debug.LogException(ex);
 				}
 			}
@@ -63,8 +62,10 @@ public class Localisation : ScriptableObject {
 	}
 
 	public static void Add(string title) {
-		if (!Instance.m_data.Contains(title)) {
-			Instance.m_data.m_strings.Add(new LocalisationString(title));
+		if (!string.IsNullOrWhiteSpace(title)) {
+			if (!Instance.m_data.Contains(title)) {
+				Instance.m_data.m_strings.Add(new LocalisationString(title));
+			}
 		}
 	}
 
@@ -81,7 +82,7 @@ public class Localisation : ScriptableObject {
 
 	public static string Get(string key) {
 		if (Instance.m_data.Contains(key) == false) {
-			return null;
+			throw new Exception("No localisable string of default value: " + key);
 		}
 
 		foreach (LocalisationString str in Instance.m_data.m_strings) {
@@ -138,7 +139,7 @@ public class Localisation : ScriptableObject {
 	}
 
 	public void CreateFile(string path) {
-		List<string> headers = GetHeaders();
+		List<string> headers = new();
 
 		using (StreamWriter sw = File.CreateText(path)) {
 
@@ -152,14 +153,6 @@ public class Localisation : ScriptableObject {
 			finalString += ",";
 			sw.WriteLine(finalString);
 		}
-	}
-
-	private List<string> GetHeaders() {
-		List<string> headers = new List<string>();
-		headers.Add("default");
-		headers.Add("text");
-
-		return headers;
 	}
 
 
