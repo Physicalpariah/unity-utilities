@@ -67,6 +67,8 @@ public class Localisation : ScriptableObject {
 				Instance.m_data.m_strings.Add(new LocalisationString(title));
 			}
 		}
+
+		Localisation.Instance.SaveToCSV();
 	}
 
 	public static string Search(string key) {
