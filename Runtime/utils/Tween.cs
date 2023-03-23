@@ -28,6 +28,7 @@ public class Tween : MonoBehaviour {
 	[SerializeField] private bool m_deactivatesOnFinish = false;
 	[SerializeField] private bool m_autoStart = false;
 	[SerializeField] private bool m_prefillValues = false;
+	[SerializeField] private bool m_postFillsValues = true;
 	[SerializeField] private bool m_repeats = false;
 	[SerializeField] private int m_repeatCount = -1;
 
@@ -128,7 +129,10 @@ public class Tween : MonoBehaviour {
 			yield return frame;
 		}
 
-		SetTransfrom(1);
+
+		if (m_postFillsValues) {
+			SetTransfrom(1);
+		}
 
 		if (m_repeats) {
 			if (m_repeatCount > 0) {
