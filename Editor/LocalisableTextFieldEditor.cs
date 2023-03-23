@@ -16,10 +16,19 @@ public class LocalisableTextFieldEditor : Editor {
 	public override void OnInspectorGUI() {
 		DrawDefaultInspector();
 		LocalisableTextField handler = (LocalisableTextField)target;
+
+		if (GUILayout.Button("Apply")) {
+			Apply(handler);
+		}
+
+		if (m_lastUsed == handler.m_text.m_value) { return; }
+		Apply(handler);
+	}
+
+	private void Apply(LocalisableTextField handler) {
+
 		if (handler.m_label == null) { return; }
 		if (string.IsNullOrWhiteSpace(handler.m_text.m_value)) { return; }
-		if (m_lastUsed == handler.m_text.m_value) { return; }
-
 
 		m_lastUsed = handler.m_text.m_value;
 		handler.m_label.text = handler.m_text.m_value;
