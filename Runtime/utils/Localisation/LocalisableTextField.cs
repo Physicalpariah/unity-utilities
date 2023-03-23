@@ -17,6 +17,7 @@ public class LocalisableTextField : MonoBehaviour {
 
 	// Unity Callbacks
 	private void OnEnable() {
+		if (string.IsNullOrWhiteSpace(m_text.m_value)) { return; }
 		if (m_label == null) { m_label = GetComponent<TMP_Text>(); }
 		m_label.text = Localisation.Get(m_text.m_value);
 	}
