@@ -11,8 +11,8 @@ public class LocalisableTextField : MonoBehaviour {
 	// Dependencies
 
 	// Properties
-	[SerializeField] private LocalisableField m_text;
-	[SerializeField] private TMP_Text m_label;
+	public LocalisableField m_text;
+	public TMP_Text m_label;
 	// Initalisation Functions
 
 	// Unity Callbacks
