@@ -18,6 +18,8 @@ public class Localisation : ScriptableObject {
 	[SerializeField] private string m_csvFileName = "localisation";
 	private string m_extension = ".csv";
 
+	public bool m_addsInEditorOnGet = true;
+
 	private string m_fullFilePath {
 		get {
 			return Application.dataPath + m_savePath + m_csvFileName + "-" + m_currentLanguage + m_extension;
@@ -97,14 +99,14 @@ public class Localisation : ScriptableObject {
 
 	public static string Get(string key) {
 		if (Instance.m_data.Contains(key) == false) {
-#if UNITY_EDITOR
-			Add(key);
-			foreach (LocalisationString str in Instance.m_data.m_strings) {
-				if (str.m_default.ToLower() == key.ToLower()) {
-					return str.m_current;
+			if (Application.platform == RuntimePlatform.OSXEditor && Instance.m_addsInEditorOnGet) {
+				Add(key);
+				foreach (LocalisationString str in Instance.m_data.m_strings) {
+					if (str.m_default.ToLower() == key.ToLower()) {
+						return str.m_current;
+					}
 				}
 			}
-#endif
 			throw new Exception("No localisable string of default value: " + key);
 		}
 
