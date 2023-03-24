@@ -8,7 +8,7 @@ using System;
 
 public class UI_LocalisationStringValidator : MonoBehaviour {
 	// Properties
-    [SerializeField] private LocalisableField m_text;
+	[SerializeField] private LocalisableField m_text;
 	[SerializeField] private Text m_label;
 
 	// Initalisation Functions
@@ -16,6 +16,8 @@ public class UI_LocalisationStringValidator : MonoBehaviour {
 	// Unity Callbacks
 	private void OnEnable() {
 		m_label.text = Localisation.UseKey(m_text.m_value);
+
+		LogUtils.LogPriority("woo");
 	}
 
 	// Public Functions
