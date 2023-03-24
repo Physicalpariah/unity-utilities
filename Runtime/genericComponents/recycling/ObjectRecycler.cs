@@ -34,6 +34,7 @@ public class ObjectRecycler {
 	public ObjectRecycler() {
 		m_registeredPrefabDict = new Dictionary<string, RecycleablePrefabContainer>();
 		SceneManager.sceneLoaded += ClearPrefabContainers;
+		SceneManager.sceneUnloaded += UnloadScene;
 	}
 
 	// Public Functions
@@ -97,6 +98,10 @@ public class ObjectRecycler {
 
 
 	public void ClearPrefabContainers(Scene scene, LoadSceneMode mode) {
+		m_registeredPrefabDict.Clear();
+	}
+
+	private void UnloadScene(Scene scene) {
 		m_registeredPrefabDict.Clear();
 	}
 	// Private Functions
