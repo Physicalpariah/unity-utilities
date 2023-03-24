@@ -122,9 +122,6 @@ public class Tween : MonoBehaviour {
 		float time = m_timeSeconds * GetFrameRate();
 		for (float a = 1; a < time; a++) {
 			float curveLerp = m_curve.Evaluate(a / time);
-			if (curveLerp == 0) {
-				Debug.Log("evaluating tween: " + m_timeSeconds + "*" + GetFrameRate() + " _ " + gameObject);
-			}
 			SetTransfrom(curveLerp);
 			yield return frame;
 		}
