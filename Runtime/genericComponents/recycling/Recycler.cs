@@ -77,10 +77,10 @@ public class Recycler<T> : MonoBehaviour {
 			return;
 		}
 
-		if (m_holder.activeInHierarchy == false) {
-			LogUtils.LogWarning("Nah not spawning anything, inactive");
-			return;
-		}
+		// if (m_holder.activeInHierarchy == false) {
+		// 	LogUtils.LogWarning("Nah not spawning anything, inactive");
+		// 	return;
+		// }
 
 		for (int a = 0; a < data.Count; a++) {
 			GameObject cell = CreateCell(data[a]);
