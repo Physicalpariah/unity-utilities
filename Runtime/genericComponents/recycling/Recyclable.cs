@@ -18,6 +18,10 @@ public class Recyclable : MonoBehaviour {
 	protected virtual void OnEnable() {
 		m_recycleData.m_enables++;
 	}
+
+	private void OnDestroy() {
+		Deactivate();
+	}
 	// Public Functions
 	public virtual void InitRecycleable(object[] data) {
 		m_manager = data[0];
