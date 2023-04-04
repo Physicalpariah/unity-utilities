@@ -17,7 +17,6 @@ public class UI_ViewController : MonoBehaviour {
 	[SerializeField] protected List<UI_ViewController> m_subPanelsToOpen;
 	[SerializeField] protected List<UI_ViewController> m_subpanelsToClose;
 
-	protected List<object> m_dependencies;
 
 	[Header("Navigation")]
 	[SerializeField] protected GameObject m_firstSelected;
@@ -63,10 +62,6 @@ public class UI_ViewController : MonoBehaviour {
 
 	protected virtual void OnDisable() {
 		UnsubscribeEvents();
-	}
-
-	public virtual void InjectDependencies(List<object> dependencies) {
-		m_dependencies = dependencies;
 	}
 
 	// Core Functions

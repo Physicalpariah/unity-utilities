@@ -6,77 +6,54 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class UI_View : MonoBehaviour
-{
-    // Properties
+public class UI_View : MonoBehaviour {
+	// Properties
 
-    [SerializeField] protected GameObject m_viewRoot;
-    protected UI_ViewController m_controller;
-    public CoreEvent e_viewInitialised;
-    public bool m_viewShown;
+	[SerializeField] protected GameObject m_viewRoot;
+	protected UI_ViewController m_controller;
+	public CoreEvent e_viewInitialised;
+	public bool m_viewShown;
 
-    // Initalisation Functions
+	// Initalisation Functions
 
-    public virtual void Initialise(UI_ViewController controller)
-    {
-        if (controller == null)
-        {
-            LogUtils.LogError("No controller detected");
-        }
-        m_controller = controller;
+	public virtual void Initialise(UI_ViewController controller) {
+		if (controller == null) {
+			LogUtils.LogError("No controller detected");
+		}
+		m_controller = controller;
 
-        if (m_viewRoot == null)
-        {
-            m_viewRoot = gameObject;
-        }
+		if (m_viewRoot == null) {
+			m_viewRoot = gameObject;
+		}
 
-    }
+	}
 
-    public virtual void Initialise(UI_ViewController controller, List<object> dependencies)
-    {
-        Initialise(controller);
-        InjectDependencies(dependencies);
-    }
 
-    public virtual void Initialise(UI_ViewController controller, List<object> dependencies, object data)
-    {
-        Initialise(controller);
-        InjectDependencies(dependencies);
-    }
+	public virtual void Initialise(UI_ViewController controller, object data) {
+		Initialise(controller);
+	}
 
-    public virtual void Initialise(UI_ViewController controller, object data)
-    {
-        Initialise(controller);
-    }
 
-    public virtual void InjectDependencies(List<object> data)
-    {
+	public virtual void ShutDown() {
 
-    }
+	}
 
-    public virtual void ShutDown()
-    {
+	public virtual void HideView() {
+		if (m_viewShown == false) { return; }
+		m_viewShown = false;
+		m_viewRoot.SetActive(false);
+	}
 
-    }
-
-    public virtual void HideView()
-    {
-        if (m_viewShown == false) { return; }
-        m_viewShown = false;
-        m_viewRoot.SetActive(false);
-    }
-
-    public virtual void ShowView()
-    {
-        if (m_viewShown) { return; }
-        m_viewShown = true;
-        m_viewRoot.SetActive(true);
-    }
+	public virtual void ShowView() {
+		if (m_viewShown) { return; }
+		m_viewShown = true;
+		m_viewRoot.SetActive(true);
+	}
 
 
 
-    // Public Functions
+	// Public Functions
 
-    // Private Functions
+	// Private Functions
 
 }
