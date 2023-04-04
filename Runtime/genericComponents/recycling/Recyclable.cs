@@ -22,6 +22,10 @@ public class Recyclable : MonoBehaviour {
 	private void OnDestroy() {
 		Deactivate();
 	}
+
+	private void OnAppplicationQuit() {
+		Deactivate();
+	}
 	// Public Functions
 	public virtual void InitRecycleable(object[] data) {
 		m_manager = data[0];
