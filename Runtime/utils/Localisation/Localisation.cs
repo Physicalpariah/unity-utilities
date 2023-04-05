@@ -108,7 +108,7 @@ public class Localisation : ScriptableObject {
 				}
 			}
 			Debug.LogError("No localisable string of default value: " + key);
-			return "NO VALUE FOUND";
+			return "@@@@ NO VALUE @@@@@";
 		}
 
 		foreach (LocalisationString str in Instance.m_data.m_strings) {

@@ -1,6 +1,6 @@
 {
     "name": "com.anchorite.utils",
-    "version": "1.0.178",
+    "version": "1.0.179",
     "displayName": "Anchorite Utils",
     "description": "A collection of various helper utilities",
     "unity": "2021.3",
