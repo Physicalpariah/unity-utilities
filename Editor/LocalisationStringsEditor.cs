@@ -35,6 +35,7 @@ public class LocalisationStringsEditor : EditorWindow {
 	public void OnEnable() {
 		AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
 		Debug.Log("Subscribing");
+		Localisation.Instance.LoadDataFromCSV();
 	}
 
 	public void OnDisable() {
