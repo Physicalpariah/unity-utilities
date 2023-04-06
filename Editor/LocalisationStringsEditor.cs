@@ -149,6 +149,9 @@ public class LocalisationStringsEditor : EditorWindow {
 
 		if (GUILayout.Button(editKey)) {
 			m_editsKeys = !m_editsKeys;
+			if (!m_editsKeys) {
+				Localisation.Instance.SaveToCSV();
+			}
 		}
 	}
 
@@ -179,6 +182,7 @@ public class LocalisationStringsEditor : EditorWindow {
 		if (GUILayout.Button("-", GUILayout.Width(30))) {
 			Localisation.Instance.m_data.m_strings.Remove(data);
 			Clear();
+			Localisation.Instance.SaveToCSV();
 		}
 		GUILayout.EndHorizontal();
 	}
