@@ -29,9 +29,17 @@ public class LocalisationStringsEditor : EditorWindow {
 	[MenuItem("Anchorite/utils/Localisation Editor")]
 	static void Init() {
 		_window = (LocalisationStringsEditor)EditorWindow.GetWindow(typeof(LocalisationStringsEditor));
+		AssemblyReloadEvents.afterAssemblyReload += _window.OnAfterAssemblyReload;
+	}
+
+	public void OnDisable() {
+		AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
 	}
 
 	// Unity Callbacks
+	private void OnAfterAssemblyReload() {
+		Localisation.Instance.LoadDataFromCSV();
+	}
 
 	private void OnGUI() {
 		DrawGUI();
@@ -39,10 +47,6 @@ public class LocalisationStringsEditor : EditorWindow {
 
 	public static void DrawGUI() {
 		GUILayout.Label("Localisation:");
-
-
-
-
 
 		GUILayout.Space(10);
 		// , m_selectedLanguage, Enum.GetNames(typeof(SystemLanguage)));
