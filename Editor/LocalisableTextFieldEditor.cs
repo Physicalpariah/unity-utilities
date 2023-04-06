@@ -17,9 +17,6 @@ public class LocalisableTextFieldEditor : Editor {
 		DrawDefaultInspector();
 		LocalisableTextField handler = (LocalisableTextField)target;
 
-		if (GUILayout.Button("Apply")) {
-			Apply(handler);
-		}
 
 		if (m_lastUsed == handler.m_text.m_value) { return; }
 		Apply(handler);
