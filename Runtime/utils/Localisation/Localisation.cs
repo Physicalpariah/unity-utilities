@@ -46,6 +46,7 @@ public class Localisation : ScriptableObject {
 			e_languageChanged();
 		}
 	}
+
 	// Initalisation Functions
 
 	// Unity Callbacks
@@ -57,6 +58,7 @@ public class Localisation : ScriptableObject {
 	}
 
 	// Public Functions
+
 
 	public static string UseKey(string key) {
 		Add(key);
@@ -161,7 +163,9 @@ public class Localisation : ScriptableObject {
 			// when we're done, add one last comma and.. a timestamp?
 			dat += ",";
 			// write the line
-			sw.WriteLine(dat);
+			if (dat != ",") {
+				sw.WriteLine(dat);
+			}
 		}
 	}
 
@@ -191,13 +195,17 @@ public class Localisation : ScriptableObject {
 							text.m_default = values[0];
 							text.m_current = values[1];
 							if (values.Length > 2) {
-								text.m_comment = values[2];
+								if (!string.IsNullOrWhiteSpace(values[2])) {
+									text.m_comment = values[2];
+								}
 							}
+
+
+							// save to LocalisableText
+							loadedText.Add(text);
 						}
 					}
 
-					// save to LocalisableText
-					loadedText.Add(text);
 				}
 			}
 		}

@@ -29,16 +29,24 @@ public class LocalisationStringsEditor : EditorWindow {
 	[MenuItem("Anchorite/utils/Localisation Editor")]
 	static void Init() {
 		_window = (LocalisationStringsEditor)EditorWindow.GetWindow(typeof(LocalisationStringsEditor));
-		AssemblyReloadEvents.afterAssemblyReload += _window.OnAfterAssemblyReload;
+		// _window.OnEnable();
+	}
+
+	public void OnEnable() {
+		AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
+		Debug.Log("Subscribing");
 	}
 
 	public void OnDisable() {
 		AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
+		Debug.Log("Unsubscribing");
 	}
 
 	// Unity Callbacks
 	private void OnAfterAssemblyReload() {
 		Localisation.Instance.LoadDataFromCSV();
+		Debug.Log("Assembly reload fired. Loading");
+		ShowEditor();
 	}
 
 	private void OnGUI() {
