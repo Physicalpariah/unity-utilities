@@ -81,6 +81,12 @@ public class ObjectUtils {
 		return obj;
 	}
 
+	public static GameObject SpawnWithData(GameObject prefab, object manager, object data) {
+		GameObject obj = ObjectRecycler.Instance.SpawnItem(prefab, data, manager);
+		return obj;
+	}
+
+
 	public static GameObject SpawnUIWithData(GameObject prefab, GameObject parent, object manager, object data) {
 		GameObject obj = ObjectRecycler.Instance.SpawnItem(prefab, data, manager);
 		obj.transform.SetParent(parent.transform, false);

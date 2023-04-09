@@ -60,6 +60,7 @@ public class Recycler<T> : MonoBehaviour {
 		}
 
 		// cleanup... should only be required if somehow shit is left in the holder.
+		if (m_holder == null) { return; }
 		for (int a = 0; a < m_holder.transform.childCount; a++) {
 			if (m_holder.transform.GetChild(a).gameObject.activeInHierarchy) {
 				ObjectUtils.DespawnItem(m_holder.transform.GetChild(a).gameObject);
@@ -96,6 +97,9 @@ public class Recycler<T> : MonoBehaviour {
 	}
 
 	protected virtual GameObject CreateCell(object element) {
+		if (m_holder == null) {
+			return CreateCell(element, null, m_spawnablePrefab);
+		}
 		return CreateCell(element, m_holder.transform, m_spawnablePrefab);
 	}
 
@@ -107,7 +111,9 @@ public class Recycler<T> : MonoBehaviour {
 			return null;
 		}
 
-		obj.transform.position = m_holder.transform.position;
+		if (m_holder != null) {
+			obj.transform.position = m_holder.transform.position;
+		}
 
 		if (!m_spawnedItems.Contains(obj)) {
 			m_spawnedItems.Add(obj);
@@ -121,6 +127,9 @@ public class Recycler<T> : MonoBehaviour {
 	}
 
 	protected virtual GameObject SpawnCell(object element, Transform holder, GameObject prefab) {
+		if (m_holder == null) {
+			return ObjectUtils.SpawnWithData(prefab, this, element);
+		}
 		return ObjectUtils.SpawnWithData(prefab, holder.gameObject, this, element);
 	}
 
