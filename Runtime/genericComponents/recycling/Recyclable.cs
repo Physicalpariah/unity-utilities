@@ -54,7 +54,7 @@ public class Recyclable : MonoBehaviour {
 
 	public virtual void Deactivate() {
 		CheckInitBalance();
-		gameObject.SetActive(false);
+		ObjectUtils.DespawnItem(gameObject);
 	}
 	// Private Functions
 
