@@ -10,7 +10,7 @@ using System.IO;
 public class SceneTabs : EditorWindow {
 	// Properties
 	private static SceneTabObject m_sceneTabs;
-	private static string m_filePath = "data/sceneTabs/";
+	private static string m_filePath = "data/info/";
 	private static string m_fileName = "sceneTabs";
 	// Add menu named "My Window" to the Window menu
 	[MenuItem("Anchorite/SceneTab")]

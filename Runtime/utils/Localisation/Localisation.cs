@@ -30,9 +30,9 @@ public class Localisation : ScriptableObject {
 	public static Localisation Instance {
 		get {
 			if (_instance == null) {
-				_instance = Resources.Load("data/localisation/strings") as Localisation;
+				_instance = Resources.Load("data/info/localisation") as Localisation;
 				if (_instance == null) {
-					Exception ex = new Exception("Whoa no localisation info, should be located at Resources/data/localisation/strings");
+					Exception ex = new Exception("Whoa no localisation info, should be located at Resources/data/info/localisation");
 					Debug.LogException(ex);
 				}
 			}

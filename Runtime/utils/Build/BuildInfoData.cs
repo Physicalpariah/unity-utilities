@@ -19,10 +19,10 @@ public class BuildInfoData : ScriptableObject {
 	public static BuildInfoData Instance {
 		get {
 			if (_instance == null) {
-				_instance = Resources.Load("data/build/build-info") as BuildInfoData;
+				_instance = Resources.Load("data/info/build-info") as BuildInfoData;
 
 				if (_instance == null) {
-					Exception ex = new Exception("Whoa no build info, should be located at Resources/data/build/build-info");
+					Exception ex = new Exception("Whoa no build info, should be located at Resources/data/build-info/build-info");
 					Debug.LogException(ex);
 				}
 			}

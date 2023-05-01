@@ -14,7 +14,7 @@ public class LogUtilsConfig : ScriptableObject {
 	public bool m_doesTODOLog = true;
 
 
-	private static string m_loadPath = "data/logutils";
+	private static string m_loadPath = "data/info/logutils";
 	private static LogUtilsConfig m_instance;
 	public static LogUtilsConfig Instance {
 		get {
