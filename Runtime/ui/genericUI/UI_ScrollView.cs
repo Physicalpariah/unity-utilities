@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class UI_ScrollView<T> : Recycler<T> {
 	// Properties
+	[SerializeField] protected GameObject m_seperatorPrefab;
 	public UI_ViewController m_controller;
 	// Initalisation Functions
 
@@ -18,6 +19,17 @@ public class UI_ScrollView<T> : Recycler<T> {
 	public void Initialise(List<T> data, UI_ViewController controller) {
 		SetController(controller);
 		Initialise(data);
+	}
+
+
+	public void Initialise(Dictionary<string, List<T>> data, UI_ViewController controller) {
+		SetController(controller);
+		Initialise();
+
+		foreach (KeyValuePair<string, List<T>> kvp in data) {
+			CreateCell(kvp.Key, m_holder.transform, m_seperatorPrefab);
+			Append(kvp.Value);
+		}
 	}
 
 	public void SetController(UI_ViewController ctrl) {
