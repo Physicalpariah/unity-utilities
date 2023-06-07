@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 public class Tween : MonoBehaviour {
@@ -35,6 +36,8 @@ public class Tween : MonoBehaviour {
 	private int m_currentRepeat = 0;
 	private CanvasGroup m_canvasGroup;
 	private Coroutine c_tweenRoutine;
+
+	public UnityEvent m_completionAction;
 
 
 	// Initalisation Functions
@@ -148,6 +151,8 @@ public class Tween : MonoBehaviour {
 		else if (m_deactivatesOnFinish) {
 			gameObject.SetActive(false);
 		}
+
+		m_completionAction.Invoke();
 	}
 
 

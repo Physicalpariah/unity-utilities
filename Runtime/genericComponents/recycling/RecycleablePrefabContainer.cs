@@ -13,7 +13,7 @@ public class RecycleablePrefabContainer {
 	public List<Recyclable> m_activeItems { get; private set; }
 	public GameObject m_spawnablePrefab { get; private set; }
 	public int m_rawSpawns { get; private set; } = 0;
-	private int m_maxSpawns = 100;
+	private int m_maxSpawns = 1000;
 
 	// Initalisation Functions
 	public RecycleablePrefabContainer(GameObject prefab) {

@@ -21,6 +21,7 @@ public class RecycleableData {
 	public bool m_caresAboutInitBalance = true;
 	public int m_initialisations = 0;
 	public int m_enables = 0;
+
 	// Initalisation Functions
 
 	// Unity Callbacks
