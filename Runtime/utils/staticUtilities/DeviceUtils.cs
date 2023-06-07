@@ -103,7 +103,7 @@ public static class DeviceUtils {
 		}
 	}
 
-	private static bool isPlatformiOS {
+	public static bool isPlatformiOS {
 		get {
 			if (Application.platform == RuntimePlatform.IPhonePlayer) {
 				return true;
