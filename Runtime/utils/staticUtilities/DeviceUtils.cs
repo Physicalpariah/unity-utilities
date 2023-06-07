@@ -11,7 +11,6 @@ using UnityEngine.iOS;
 public static class DeviceUtils {
 
 	public static n_deviceType m_debugDevice;
-	public static bool m_forcesDebugDevice = false;
 
 
 	public static bool ValidateAppleTVGen3() {
@@ -79,6 +78,9 @@ public static class DeviceUtils {
 			if (Application.platform == RuntimePlatform.OSXPlayer) {
 				return true;
 			}
+			if (Application.platform == RuntimePlatform.OSXEditor && m_debugDevice == n_deviceType.mac) {
+				return true;
+			}
 			return false;
 		}
 	}
@@ -86,6 +88,9 @@ public static class DeviceUtils {
 	public static bool isTV {
 		get {
 			if (Application.platform == RuntimePlatform.tvOS) {
+				return true;
+			}
+			if (Application.platform == RuntimePlatform.OSXEditor && m_debugDevice == n_deviceType.mac) {
 				return true;
 			}
 			return false;
@@ -103,8 +108,13 @@ public static class DeviceUtils {
 		}
 	}
 
-	public static bool isPlatformiOS {
+	private static bool isPlatformiOS {
 		get {
+			if (Application.platform == RuntimePlatform.OSXEditor) {
+				if (m_debugDevice == n_deviceType.iPhone) {
+					return true;
+				}
+			}
 			if (Application.platform == RuntimePlatform.IPhonePlayer) {
 				return true;
 			}
