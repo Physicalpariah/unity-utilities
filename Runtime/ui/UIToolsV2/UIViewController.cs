@@ -47,6 +47,7 @@ public class UIViewController : MonoBehaviour {
 
 	private IEnumerator InitRoutine() {
 		yield return new WaitForEndOfFrame();
+		HandleInitialViewState();
 	}
 
 	private void HandleInitialViewState() {
