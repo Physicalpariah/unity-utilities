@@ -30,7 +30,10 @@ public class UIWindow : MonoBehaviour {
 
 	private void EnableViewControllers() {
 		for (int a = 0; a < transform.childCount; a++) {
-			transform.GetChild(a).gameObject.SetActive(true);
+			Transform trans = transform.GetChild(a);
+			if (trans != null) {
+				trans.gameObject.SetActive(true);
+			}
 		}
 	}
 
