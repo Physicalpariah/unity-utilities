@@ -55,7 +55,7 @@ public class UIWindow : MonoBehaviour {
 	}
 
 	public void Back() {
-		if (m_history.Count <= 1) { return; }
+		if (m_history.Count <= 0) { return; }
 
 		m_currentView.Close();
 		UIViewController current = m_history[m_history.Count - 1];
