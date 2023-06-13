@@ -19,7 +19,6 @@ public class UIViewController : MonoBehaviour {
 	public List<UIConnection> m_connections;
 	public Button m_btnBack;
 
-	private Coroutine c_init;
 	// Initalisation Functions
 	private void Start() {
 		m_window = GetComponentInParent<UIWindow>();
@@ -35,47 +34,11 @@ public class UIViewController : MonoBehaviour {
 		}
 
 		SubBackButton();
-
-		c_init = StartCoroutine(InitRoutine());
 	}
 
 	private void EnableViews() {
 		for (int a = 0; a < transform.childCount; a++) {
 			transform.GetChild(a).gameObject.SetActive(true);
-		}
-	}
-
-	private IEnumerator InitRoutine() {
-		yield return new WaitForEndOfFrame();
-		HandleInitialViewState();
-	}
-
-	private void HandleInitialViewState() {
-		UIView firstExclusive = null;
-		foreach (UIView view in m_views) {
-			switch (view.m_viewData.m_viewType) {
-				case (n_viewType.subView): {
-						view.Open();
-						break;
-					}
-				case (n_viewType.modal): {
-						view.Close();
-						break;
-					}
-				case (n_viewType.exclusive): {
-						if (firstExclusive == null) {
-							firstExclusive = view;
-						}
-						break;
-					}
-			}
-		}
-
-		if (firstExclusive != null) {
-			foreach (UIView view in m_views) {
-				view.Close();
-			}
-			firstExclusive.Open();
 		}
 	}
 
@@ -91,8 +54,34 @@ public class UIViewController : MonoBehaviour {
 	}
 
 	public void Open() {
+		UIView firstExclusive = null;
 		foreach (UIView view in m_views) {
-			view.Open();
+			LogUtils.LogPriority($"iterating views: {view.m_viewData.m_viewType}");
+			switch (view.m_viewData.m_viewType) {
+				case (n_viewType.subView): {
+						view.Open();
+						break;
+					}
+				case (n_viewType.modal): {
+						view.Close();
+						break;
+					}
+				case (n_viewType.exclusive): {
+						if (firstExclusive == null) {
+							LogUtils.LogPriority("setting fist exclusive");
+							firstExclusive = view;
+						}
+						break;
+					}
+			}
+		}
+
+		if (firstExclusive != null) {
+			LogUtils.LogPriority("closing alll and opening exclusive");
+			foreach (UIView view in m_views) {
+				view.Close();
+			}
+			firstExclusive.Open();
 		}
 	}
 
