@@ -53,10 +53,9 @@ public class UIViewController : MonoBehaviour {
 		m_views.Add(view);
 	}
 
-	public void Open() {
+	public virtual void Open() {
 		UIView firstExclusive = null;
 		foreach (UIView view in m_views) {
-			LogUtils.LogPriority($"iterating views: {view.m_viewData.m_viewType}");
 			switch (view.m_viewData.m_viewType) {
 				case (n_viewType.subView): {
 						view.Open();
@@ -68,7 +67,6 @@ public class UIViewController : MonoBehaviour {
 					}
 				case (n_viewType.exclusive): {
 						if (firstExclusive == null) {
-							LogUtils.LogPriority("setting fist exclusive");
 							firstExclusive = view;
 						}
 						break;
@@ -77,7 +75,6 @@ public class UIViewController : MonoBehaviour {
 		}
 
 		if (firstExclusive != null) {
-			LogUtils.LogPriority("closing alll and opening exclusive");
 			foreach (UIView view in m_views) {
 				view.Close();
 			}
@@ -85,7 +82,7 @@ public class UIViewController : MonoBehaviour {
 		}
 	}
 
-	public void Close() {
+	public virtual void Close() {
 		foreach (UIView view in m_views) {
 			view.Close();
 		}
