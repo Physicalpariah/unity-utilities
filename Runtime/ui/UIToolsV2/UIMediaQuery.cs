@@ -118,6 +118,7 @@ public enum n_mediaQueryType {
 }
 
 public enum n_mediaOrientation {
+	none,
 	landscape,
 	portrait,
 }

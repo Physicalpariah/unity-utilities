@@ -14,6 +14,7 @@ public class UIView : MonoBehaviour {
 	// Dependencies
 	protected UIViewController m_controller;
 	// Properties
+	public UIViewData m_viewData;
 
 	// Initalisation Functions
 
@@ -35,5 +36,16 @@ public class UIView : MonoBehaviour {
 	// Private Functions
 
 
+}
+
+public struct UIViewData {
+	public n_viewType m_viewType;
+}
+
+
+public enum n_viewType {
+	subView,
+	exclusive,
+	modal,
 }
 

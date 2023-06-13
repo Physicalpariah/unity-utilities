@@ -23,11 +23,15 @@ public class UIWindow : MonoBehaviour {
 		m_views = new();
 
 		// hack to turn on all the children so they can register.
+		EnableViewControllers();
+
+		StartCoroutine(InitRoutine());
+	}
+
+	private void EnableViewControllers() {
 		for (int a = 0; a < transform.childCount; a++) {
 			transform.GetChild(a).gameObject.SetActive(true);
 		}
-
-		StartCoroutine(InitRoutine());
 	}
 
 	private IEnumerator InitRoutine() {

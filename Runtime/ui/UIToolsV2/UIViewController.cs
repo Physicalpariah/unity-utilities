@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System;
 
 
@@ -17,9 +18,14 @@ public class UIViewController : MonoBehaviour {
 	public List<UIView> m_views;
 	public List<UIConnection> m_connections;
 	public Button m_btnBack;
+
+	private Coroutine c_init;
 	// Initalisation Functions
 	private void Start() {
 		m_window = GetComponentInParent<UIWindow>();
+
+		EnableViews();
+
 		if (m_window == null) { throw new Exception("Nope, no window found for this view."); }
 		m_window.RegisterView(this);
 
@@ -29,6 +35,47 @@ public class UIViewController : MonoBehaviour {
 		}
 
 		SubBackButton();
+
+		c_init = StartCoroutine(InitRoutine());
+	}
+
+	private void EnableViews() {
+		for (int a = 0; a < transform.childCount; a++) {
+			transform.GetChild(a).gameObject.SetActive(true);
+		}
+	}
+
+	private IEnumerator InitRoutine() {
+		yield return new WaitForEndOfFrame();
+	}
+
+	private void HandleInitialViewState() {
+		UIView firstExclusive = null;
+		foreach (UIView view in m_views) {
+			switch (view.m_viewData.m_viewType) {
+				case (n_viewType.subView): {
+						view.Open();
+						break;
+					}
+				case (n_viewType.modal): {
+						view.Close();
+						break;
+					}
+				case (n_viewType.exclusive): {
+						if (firstExclusive == null) {
+							firstExclusive = view;
+						}
+						break;
+					}
+			}
+		}
+
+		if (firstExclusive != null) {
+			foreach (UIView view in m_views) {
+				view.Close();
+			}
+			firstExclusive.Open();
+		}
 	}
 
 
