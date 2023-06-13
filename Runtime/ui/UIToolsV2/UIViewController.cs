@@ -106,7 +106,13 @@ public class UIConnection {
 
 	public void Apply(UIWindow window) {
 		m_window = window;
-		UIUtils.SubscribeButton(m_button, Segue);
+		if (m_toView == null) {
+			m_button.interactable = false;
+		}
+		else {
+			m_button.interactable = true;
+			UIUtils.SubscribeButton(m_button, Segue);
+		}
 	}
 
 	private void Segue() {
