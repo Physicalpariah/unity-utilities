@@ -38,6 +38,7 @@ public class UIView : MonoBehaviour {
 
 }
 
+[Serializable]
 public struct UIViewData {
 	public n_viewType m_viewType;
 }
