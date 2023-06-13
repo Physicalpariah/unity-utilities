@@ -21,9 +21,13 @@ public class UIWindow : MonoBehaviour {
 	// Unity Callbacks
 	public void Awake() {
 		m_views = new();
-		Application.targetFrameRate = 60;
-		StartCoroutine(InitRoutine());
 
+		// hack to turn on all the children so they can register.
+		for (int a = 0; a < transform.childCount; a++) {
+			transform.GetChild(a).gameObject.SetActive(true);
+		}
+
+		StartCoroutine(InitRoutine());
 	}
 
 	private IEnumerator InitRoutine() {
