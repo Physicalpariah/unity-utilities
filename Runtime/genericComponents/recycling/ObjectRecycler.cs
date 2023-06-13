@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 
 
@@ -33,8 +37,17 @@ public class ObjectRecycler {
 
 	public ObjectRecycler() {
 		m_registeredPrefabDict = new Dictionary<string, RecycleablePrefabContainer>();
+
+		SceneManager.sceneLoaded -= ClearPrefabContainers;
+		SceneManager.sceneUnloaded -= UnloadScene;
+
 		SceneManager.sceneLoaded += ClearPrefabContainers;
 		SceneManager.sceneUnloaded += UnloadScene;
+
+#if UNITY_EDITOR
+		EditorApplication.playModeStateChanged -= OnPlayModeExit;
+		EditorApplication.playModeStateChanged += OnPlayModeExit;
+#endif
 	}
 
 	// Public Functions
@@ -98,10 +111,18 @@ public class ObjectRecycler {
 
 
 	public void ClearPrefabContainers(Scene scene, LoadSceneMode mode) {
-		m_registeredPrefabDict.Clear();
+		Clear();
 	}
 
 	private void UnloadScene(Scene scene) {
+		Clear();
+	}
+
+	private void OnPlayModeExit(PlayModeStateChange change) {
+		Clear();
+	}
+
+	private void Clear() {
 		m_registeredPrefabDict.Clear();
 	}
 	// Private Functions
