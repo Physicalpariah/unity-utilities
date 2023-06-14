@@ -15,7 +15,7 @@ public class UIViewController : MonoBehaviour {
 	// Dependencies
 	protected UIWindow m_window;
 	// Properties
-	public List<UIView> m_views;
+	public List<IView> m_views;
 	public List<UIConnection> m_connections;
 	public Button m_btnBack;
 
@@ -49,14 +49,18 @@ public class UIViewController : MonoBehaviour {
 
 	// Public Functions
 
-	public void RegisterView(UIView view) {
+	public void RegisterView(IView view) {
+		if (m_views == null) {
+			m_views = new();
+		}
+
 		m_views.Add(view);
 	}
 
 	public virtual void Open() {
-		UIView firstExclusive = null;
-		foreach (UIView view in m_views) {
-			switch (view.m_viewData.m_viewType) {
+		IView firstExclusive = null;
+		foreach (IView view in m_views) {
+			switch (view._viewData.m_viewType) {
 				case (n_viewType.subView): {
 						view.Open();
 						break;
@@ -75,7 +79,7 @@ public class UIViewController : MonoBehaviour {
 		}
 
 		if (firstExclusive != null) {
-			foreach (UIView view in m_views) {
+			foreach (IView view in m_views) {
 				view.Close();
 			}
 			firstExclusive.Open();
@@ -83,7 +87,7 @@ public class UIViewController : MonoBehaviour {
 	}
 
 	public virtual void Close() {
-		foreach (UIView view in m_views) {
+		foreach (IView view in m_views) {
 			view.Close();
 		}
 	}
