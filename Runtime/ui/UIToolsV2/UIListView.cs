@@ -33,4 +33,8 @@ public class UIListView<T> : Recycler<T>, IView {
 	public virtual void Close() {
 		gameObject.SetActive(false);
 	}
+
+	protected override GameObject SpawnCell(object element, Transform holder, GameObject prefab) {
+		return ObjectUtils.SpawnUIWithData(prefab, holder.gameObject, m_controller, element);
+	}
 }
