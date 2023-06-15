@@ -13,7 +13,7 @@ public class UIViewController : MonoBehaviour {
 	// A view controller manages a single set of views for your app, and it keeps the information in those views up-to-date
 
 	// Dependencies
-	protected UIWindow m_window;
+	public UIWindow m_window { get; private set; }
 	// Properties
 	public List<IView> m_views;
 	public List<UIConnection> m_connections;
@@ -91,6 +91,7 @@ public class UIViewController : MonoBehaviour {
 			view.Close();
 		}
 	}
+
 	// Private Functions
 	private void SubBackButton() {
 		if (m_btnBack == null) { return; }
