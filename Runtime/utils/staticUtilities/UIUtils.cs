@@ -7,6 +7,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
+#if UNITY_IOS
+using UnityEngine.iOS;
+#endif
+
+
 
 public static class UIUtils {
 	// Public Functions
@@ -85,6 +90,40 @@ public static class UIUtils {
 		List<RaycastResult> results = new List<RaycastResult>();
 		EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
 		return results.Count > 0;
+	}
+
+
+	private static float GetKeyboardHeight() {
+#if UNITY_IOS
+		switch (Device.generation) {
+			case DeviceGeneration.iPhone6:
+			case DeviceGeneration.iPhone6S:
+			case DeviceGeneration.iPhone7:
+			case DeviceGeneration.iPhone8:
+				return 243f;
+			case DeviceGeneration.iPhone6Plus:
+			case DeviceGeneration.iPhone6SPlus:
+			case DeviceGeneration.iPhone7Plus:
+			case DeviceGeneration.iPhone8Plus:
+				return 230f;
+			case DeviceGeneration.iPhone5S:
+			case DeviceGeneration.iPhoneSE1Gen:
+				return 285f;
+			case DeviceGeneration.iPhoneX:
+				return 282.5f;
+			case DeviceGeneration.iPadAir1:
+			case DeviceGeneration.iPadAir2:
+			case DeviceGeneration.iPadPro10Inch1Gen:
+				return 213f;
+			case DeviceGeneration.iPadPro10Inch2Gen:
+				return 196f;
+			case DeviceGeneration.iPadPro1Gen:
+			case DeviceGeneration.iPadPro2Gen:
+				return 193f;
+			default:
+				return 243f;
+		}
+#endif
 	}
 
 }

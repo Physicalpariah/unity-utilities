@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class UI_SeperatorCell : UI_Cell {
+public class UIListSeperator : UIListCell {
 	// Dependencies
 
 	// Properties
