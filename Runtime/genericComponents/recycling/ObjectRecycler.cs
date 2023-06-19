@@ -101,6 +101,7 @@ public class ObjectRecycler {
 
 		if (parent != null) {
 			recyclable.transform.SetParent(parent.transform);
+			recyclable.transform.SetAsLastSibling();
 		}
 
 		object[] dat = { manager, data };
