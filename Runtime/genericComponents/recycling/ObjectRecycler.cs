@@ -73,7 +73,7 @@ public class ObjectRecycler {
 
 		if (!success) {
 			if (prefab != null) {
-				LogUtils.LogIssue($"{prefab} is not a recycleable, destroying");
+				LogUtils.LogIssue($"{prefab} is not a registered recycleable, destroying");
 				GameObject.Destroy(prefab);
 			}
 		}

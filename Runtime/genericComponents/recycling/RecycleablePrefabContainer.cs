@@ -15,12 +15,23 @@ public class RecycleablePrefabContainer {
 	public int m_rawSpawns { get; private set; } = 0;
 	private int m_maxSpawns = 1000;
 
+	private GameObject m_deactivatedHolder;
+
 	// Initalisation Functions
 	public RecycleablePrefabContainer(GameObject prefab) {
 		m_spawnedItems = new List<Recyclable>();
 		m_activeItems = new List<Recyclable>();
 		m_inactiveItems = new List<Recyclable>();
 		m_spawnablePrefab = prefab;
+
+		if (m_deactivatedHolder == null) {
+			m_deactivatedHolder = GameObject.Find("deactivated-recycleable-container");
+
+			if (m_deactivatedHolder == null) {
+				m_deactivatedHolder = new();
+				m_deactivatedHolder.name = "deactivated-recycleable-container";
+			}
+		}
 	}
 
 	// Public Functions
@@ -70,6 +81,7 @@ public class RecycleablePrefabContainer {
 		m_inactiveItems.Add(recycleable);
 
 		prefab.gameObject.SetActive(false);
+		prefab.transform.SetParent(m_deactivatedHolder);
 	}
 
 	public void ClearContainer() {
