@@ -84,6 +84,7 @@ public class Recycler<T> : MonoBehaviour {
 		// }
 
 		for (int a = 0; a < data.Count; a++) {
+			LogUtils.LogPriority("Creating content cell");
 			GameObject cell = CreateCell(data[a]);
 		}
 
