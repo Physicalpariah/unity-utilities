@@ -17,7 +17,7 @@ public class UI_LocalisationStringValidator : MonoBehaviour {
 	private void OnEnable() {
 		m_label.text = Localisation.UseKey(m_text.m_value);
 
-		LogUtils.LogPriority("woo");
+
 	}
 
 	// Public Functions

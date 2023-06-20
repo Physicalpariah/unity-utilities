@@ -10,10 +10,10 @@ public class StateObject : ScriptableObject {
 	public List<StateObject> m_connections;
 
 	public virtual void OnStateEnter() {
-		LogUtils.LogPriority($"{m_name} has been entered");
+
 	}
 
 	public virtual void OnStateExit() {
-		LogUtils.LogPriority($"{m_name} is exiting");
+
 	}
 }

@@ -21,7 +21,7 @@ public class CameraShakeControllerTests {
 	// Tests
 	[SetUp]
 	public void SetupTest() {
-		LogUtils.LogPriority("Setting up");
+
 		m_controller = new CameraShakeController();
 
 		GameObject obj = new GameObject();

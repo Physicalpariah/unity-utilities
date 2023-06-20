@@ -30,8 +30,8 @@ public static class AnchoriteEvents {
 
 		LogUtils.LogError($"event {e} not unsubscribed on destroy");
 		foreach (Delegate subscriber in e.GetInvocationList()) {
-			LogUtils.LogPriority(subscriber.Target);
-			LogUtils.LogPriority(subscriber.Method.Name);
+
+
 		}
 	}
 

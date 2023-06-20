@@ -211,7 +211,7 @@ public class Localisation : ScriptableObject {
 		}
 		else {
 			if (Application.platform == RuntimePlatform.OSXEditor) {
-				LogUtils.LogPriority("No file found, creating localisation store for: " + m_currentLanguage);
+
 				foreach (LocalisationString str in Instance.m_data.m_strings) {
 					str.m_current = "";
 				}

@@ -85,7 +85,7 @@ public class MediaQuery {
 	public List<MediaAction> m_actions;
 
 	public void Activate() {
-		LogUtils.LogPriority("Activating Query: " + m_name);
+
 		foreach (MediaAction act in m_actions) {
 			act.Apply();
 		}
