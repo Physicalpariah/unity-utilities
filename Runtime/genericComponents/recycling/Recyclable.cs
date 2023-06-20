@@ -20,11 +20,11 @@ public class Recyclable : MonoBehaviour {
 	}
 
 	private void OnDestroy() {
-		Deactivate();
+		CheckInitBalance();
 	}
 
 	private void OnAppplicationQuit() {
-		Deactivate();
+		CheckInitBalance();
 	}
 	// Public Functions
 	public virtual void InitRecycleable(object[] data) {
