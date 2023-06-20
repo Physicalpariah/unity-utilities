@@ -81,6 +81,7 @@ public class RecycleablePrefabContainer {
 		m_inactiveItems.Add(recycleable);
 
 		prefab.gameObject.SetActive(false);
+		if (m_deactivatedHolder == null) { return; }
 		prefab.transform.SetParent(m_deactivatedHolder.transform, false);
 	}
 
