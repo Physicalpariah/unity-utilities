@@ -44,6 +44,10 @@ public class UIWindow : MonoBehaviour {
 
 	private void Init() {
 		CloseAllViews();
+		OpenFirstView();
+	}
+
+	protected virtual void OpenFirstView() {
 		m_currentView.Open();
 	}
 
