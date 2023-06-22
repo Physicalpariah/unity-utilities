@@ -43,7 +43,13 @@ public class UIViewController : MonoBehaviour {
 	}
 
 
-
+	public UIConnection GetConnectionToScreenByType<T>() {
+		foreach (UIConnection conn in m_connections) {
+			if (conn is T) {
+				return conn;
+			}
+		}
+	}
 
 	// Unity Callbacks
 
@@ -117,7 +123,7 @@ public class UIConnection {
 		}
 	}
 
-	private void Segue() {
+	public void Segue() {
 		m_window.Segue(m_toView);
 	}
 }
