@@ -37,4 +37,13 @@ public class UIListView<T> : Recycler<T>, IView {
 	protected override GameObject SpawnCell(object element, Transform holder, GameObject prefab) {
 		return ObjectUtils.SpawnUIWithData(prefab, holder.gameObject, m_controller, element);
 	}
+
+	public virtual void UpdateView() {
+		if (gameObject.activeInHierarchy == false) { return; }
+		OnViewUpdate();
+	}
+
+	public virtual void OnViewUpdate() {
+
+	}
 }

@@ -10,6 +10,8 @@ public interface IView {
 	UIViewData _viewData { get; }
 	void Close();
 	void Open();
+	void UpdateView();
+	void OnViewUpdate();
 }
 
 public class UIView : MonoBehaviour, IView {
@@ -45,7 +47,7 @@ public class UIView : MonoBehaviour, IView {
 		OnViewUpdate();
 	}
 
-	protected virtual void OnViewUpdate() {
+	public virtual void OnViewUpdate() {
 
 	}
 	// Private Functions
