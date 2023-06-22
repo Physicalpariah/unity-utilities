@@ -39,6 +39,15 @@ public class UIView : MonoBehaviour, IView {
 	public virtual void Close() {
 		gameObject.SetActive(false);
 	}
+
+	public virtual void UpdateView() {
+		if (gameObject.activeInHierarchy == false) { return; }
+		OnViewUpdate();
+	}
+
+	protected virtual void OnViewUpdate() {
+
+	}
 	// Private Functions
 
 
