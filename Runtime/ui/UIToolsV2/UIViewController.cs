@@ -49,6 +49,8 @@ public class UIViewController : MonoBehaviour {
 				return conn;
 			}
 		}
+
+		return null;
 	}
 
 	// Unity Callbacks
