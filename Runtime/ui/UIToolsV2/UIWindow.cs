@@ -14,7 +14,7 @@ public class UIWindow : MonoBehaviour {
 
 	// Properties
 	[SerializeField] private List<UIViewController> m_views;
-	[SerializeField] private UIViewController m_currentView;
+	[SerializeField] protected UIViewController m_currentView;
 	[SerializeField] private List<UIViewController> m_history;
 	// Initalisation Functions
 
