@@ -24,13 +24,14 @@ public class BaseTween : MonoBehaviour {
 		if (m_tweenData.m_autoStart) {
 			StartTween();
 		}
-		if (m_tweenData.m_prefillValues) {
-			Apply(0.0f);
-		}
+
 	}
 
 	[ContextMenu("Tween/Start Tween")]
 	public void StartTween() {
+		if (m_tweenData.m_prefillValues) {
+			Apply(0.0f);
+		}
 		if (c_tweenRoutine != null) {
 			StopCoroutine(c_tweenRoutine);
 		}
