@@ -55,8 +55,6 @@ public class Tween : MonoBehaviour {
 		if (m_prefillValues) {
 			SetTransfrom(0.0f);
 		}
-
-
 	}
 
 	[ContextMenu("Start Tween")]
