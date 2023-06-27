@@ -40,6 +40,14 @@ public class BaseTween : MonoBehaviour {
 	}
 	// Unity Callbacks
 
+	public void SetReversePlay() {
+		m_tweenData.m_playsBackwards = true;
+	}
+
+	public void SetForwardPlay() {
+		m_tweenData.m_playsBackwards = false;
+	}
+
 	[ContextMenu("Tween/Set/Start")]
 	private void SetToStart() {
 		Apply(0);
