@@ -22,6 +22,7 @@ public class TweenData {
 	public bool m_postFillsValues = true;
 	public bool m_bounces = false;
 	public bool m_repeats = false;
+	public bool m_playsBackwards = false;
 	public int m_repeatCount = -1;
 	// Initalisation Functions
 

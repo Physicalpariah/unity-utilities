@@ -72,7 +72,13 @@ public class BaseTween : MonoBehaviour {
 
 		float time = m_tweenData.m_timeSeconds * GetFrameRate();
 		for (float a = 1; a < time; a++) {
+
+
 			float curveLerp = m_tweenData.m_curve.Evaluate(a / time);
+			if (m_tweenData.m_playsBackwards) {
+				curveLerp = m_tweenData.m_curve.Evaluate(1 - a / time);
+			}
+
 			Apply(curveLerp);
 			yield return frame;
 		}
@@ -85,7 +91,12 @@ public class BaseTween : MonoBehaviour {
 
 		if (m_tweenData.m_bounces) {
 			for (float a = 1; a < time; a++) {
-				float curveLerp = m_tweenData.m_curve.Evaluate(1 - a / time);
+
+				float curveLerp = m_tweenData.m_curve.Evaluate(a / time);
+				if (m_tweenData.m_playsBackwards) {
+					curveLerp = m_tweenData.m_curve.Evaluate(a / time);
+				}
+
 				Apply(curveLerp);
 				yield return frame;
 			}
