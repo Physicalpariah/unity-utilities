@@ -29,7 +29,12 @@ public class BaseTween : MonoBehaviour {
 	[ContextMenu("Tween/Start Tween")]
 	public void StartTween() {
 		if (m_tweenData.m_prefillValues) {
-			Apply(0.0f);
+			if (m_tweenData.m_playsBackwards) {
+				Apply(1);
+			}
+			else {
+				Apply(0);
+			}
 		}
 		if (c_tweenRoutine != null) {
 			StopCoroutine(c_tweenRoutine);
@@ -92,7 +97,12 @@ public class BaseTween : MonoBehaviour {
 
 
 		if (m_tweenData.m_postFillsValues) {
-			Apply(1);
+			if (m_tweenData.m_playsBackwards) {
+				Apply(0);
+			}
+			else {
+				Apply(1);
+			}
 		}
 
 
