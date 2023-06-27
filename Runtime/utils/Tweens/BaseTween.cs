@@ -15,7 +15,6 @@ public class BaseTween : MonoBehaviour {
 	[SerializeField] protected TweenData m_tweenData;
 
 	private int m_currentRepeat = 0;
-	private CanvasGroup m_canvasGroup;
 	private Coroutine c_tweenRoutine;
 
 	public UnityEvent m_completionAction;
