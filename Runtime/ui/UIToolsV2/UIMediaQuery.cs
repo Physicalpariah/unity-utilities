@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using Sirenix.OdinInspector;
+// using Sirenix.OdinInspector;
 
 
 public class UIMediaQuery : MonoBehaviour {
@@ -107,16 +107,16 @@ public struct MediaAction {
 	public string m_name;
 	public n_mediaActionType m_type;
 	[Header("Reparenting")]
-	[HideIf("m_type", n_mediaActionType.layoutElement)]
+	// [HideIf("m_type", n_mediaActionType.layoutElement)]
 	public GameObject m_target;
-	[HideIf("m_type", n_mediaActionType.layoutElement)]
+	// [HideIf("m_type", n_mediaActionType.layoutElement)]
 	public GameObject m_parent;
 	[Header("Layout Element")]
-	[HideIf("m_type", n_mediaActionType.reparent)]
+	// [HideIf("m_type", n_mediaActionType.reparent)]
 	public LayoutElement m_group;
-	[HideIf("m_type", n_mediaActionType.reparent)]
+	// [HideIf("m_type", n_mediaActionType.reparent)]
 	public Vector2 m_minSize;
-	[HideIf("m_type", n_mediaActionType.reparent)]
+	// [HideIf("m_type", n_mediaActionType.reparent)]
 	public Vector2 m_prefSize;
 
 	public void Apply() {
