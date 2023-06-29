@@ -119,9 +119,11 @@ public class ObjectRecycler {
 		Clear();
 	}
 
+#if UNITY_EDITOR
 	private void OnPlayModeExit(PlayModeStateChange change) {
 		Clear();
 	}
+#endif
 
 	private void Clear() {
 		m_registeredPrefabDict.Clear();
