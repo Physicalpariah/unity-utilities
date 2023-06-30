@@ -207,6 +207,9 @@ public static class DeviceUtils {
 			if (Device.generation == DeviceGeneration.iPadMini5Gen)
 				isIpad = true;
 
+			if (Device.generation == DeviceGeneration.iPadMini6Gen)
+				isIpad = true;
+
 			if (Device.generation == DeviceGeneration.iPadPro10Inch1Gen)
 				isIpad = true;
 
