@@ -21,10 +21,12 @@ public class Recyclable : MonoBehaviour {
 
 	private void OnDestroy() {
 		CheckInitBalance();
+		ShutDown();
 	}
 
 	private void OnAppplicationQuit() {
 		CheckInitBalance();
+		ShutDown();
 	}
 	// Public Functions
 	public virtual void InitRecycleable(object[] data) {
@@ -55,6 +57,11 @@ public class Recyclable : MonoBehaviour {
 	public virtual void Deactivate() {
 		CheckInitBalance();
 		ObjectUtils.DespawnItem(gameObject);
+		ShutDown();
+	}
+
+	public virtual void ShutDown() {
+
 	}
 	// Private Functions
 
