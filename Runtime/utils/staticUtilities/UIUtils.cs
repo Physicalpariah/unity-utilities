@@ -20,6 +20,11 @@ public static class UIUtils {
 		butt.onClick.AddListener(function);
 	}
 
+	public static void SubscribeToggle(Toggle butt, UnityEngine.Events.UnityAction<bool> function) {
+		butt.onValueChanged.RemoveAllListeners();
+		butt.onValueChanged.AddListener(function);
+	}
+
 	public static void SubscribeInput(InputField field, UnityEngine.Events.UnityAction<string> function) {
 		field.onEndEdit.RemoveAllListeners();
 		field.onEndEdit.AddListener(function);
@@ -135,7 +140,7 @@ public static class UIUtils {
 		}
 #endif
 
-return 0;
+		return 0;
 	}
 
 }
