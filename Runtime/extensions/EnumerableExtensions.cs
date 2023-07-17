@@ -19,6 +19,7 @@ public static class EnumerableExtension {
 	}
 
 	public static T PickRandom<T>(this IEnumerable<T> source) {
+		if (source.Count<T>() == 0) { return default(T); }
 		return source.PickRandom(1).Single();
 	}
 
