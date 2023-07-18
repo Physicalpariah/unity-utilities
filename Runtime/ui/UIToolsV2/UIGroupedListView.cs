@@ -22,9 +22,9 @@ public class UIGroupedListView<T> : UIListView<T> {
 
 
 		foreach (KeyValuePair<string, List<T>> kvp in data) {
-
-			CreateCell(kvp.Key, m_holder.transform, m_seperatorPrefab);
-
+			if (m_seperatorPrefab != null) {
+				CreateCell(kvp.Key, m_holder.transform, m_seperatorPrefab);
+			}
 			Append(kvp.Value);
 		}
 	}
