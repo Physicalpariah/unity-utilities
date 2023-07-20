@@ -39,12 +39,14 @@ public class RecycleablePrefabContainer {
 		// 1)
 		// if we've maxxed out our items, and don't have one to recyle, recycle an active one.		
 		if (m_rawSpawns >= m_maxSpawns && m_inactiveItems.Count == 0) {
+			LogUtils.LogPriority("Getting existing active item");
 			return GetExistingActiveItem();
 		}
 
 		// 2)
 		// if we have inactive items, grab the first one that isn't null.
 		if (m_inactiveItems.Count > 0) {
+			LogUtils.LogPriority("Getting inactive item");
 			return GetInactiveItem();
 		}
 
@@ -57,6 +59,7 @@ public class RecycleablePrefabContainer {
 
 		// 3)
 		// if all of the above is not correct, create a new prefab.
+		LogUtils.LogPriority("Creating new prefab");
 		return CreateNewItem(prefab); ;
 	}
 
