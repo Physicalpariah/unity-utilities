@@ -39,14 +39,12 @@ public class RecycleablePrefabContainer {
 		// 1)
 		// if we've maxxed out our items, and don't have one to recyle, recycle an active one.		
 		if (m_rawSpawns >= m_maxSpawns && m_inactiveItems.Count == 0) {
-			LogUtils.LogPriority("Getting existing active item");
 			return GetExistingActiveItem();
 		}
 
 		// 2)
 		// if we have inactive items, grab the first one that isn't null.
 		if (m_inactiveItems.Count > 0) {
-			LogUtils.LogPriority("Getting inactive item");
 			return GetInactiveItem();
 		}
 
@@ -59,7 +57,7 @@ public class RecycleablePrefabContainer {
 
 		// 3)
 		// if all of the above is not correct, create a new prefab.
-		LogUtils.LogPriority("Creating new prefab");
+
 		return CreateNewItem(prefab); ;
 	}
 
@@ -104,6 +102,7 @@ public class RecycleablePrefabContainer {
 			recyclable = m_inactiveItems[a];
 			if (recyclable != null) {
 				if (recyclable.gameObject != null) {
+					LogUtils.LogPriority("Getting inactive item: " + recyclable.m_recycleData.m_uniqueID);
 					ActivateItem(recyclable);
 					return recyclable;
 				}
@@ -112,7 +111,7 @@ public class RecycleablePrefabContainer {
 				m_inactiveItems.Remove(m_inactiveItems[a]);
 			}
 		}
-
+		LogUtils.LogPriority("Getting inactive item: " + recyclable.m_recycleData.m_uniqueID);
 		return recyclable;
 	}
 
@@ -133,6 +132,8 @@ public class RecycleablePrefabContainer {
 		}
 		m_spawnedItems.Add(recyclable);
 		m_activeItems.Add(recyclable);
+
+		LogUtils.LogPriority("Creating new prefab: " + recyclable.m_recycleData.m_uniqueID);
 		return recyclable;
 	}
 
@@ -170,6 +171,8 @@ public class RecycleablePrefabContainer {
 			DeactivateRecycleable(active.gameObject);
 			ActivateItem(active);
 		}
+
+		LogUtils.LogPriority("Getting existing active item: " + active.m_recycleData.m_uniqueID);
 		return active;
 	}
 
