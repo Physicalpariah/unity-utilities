@@ -63,6 +63,8 @@ public class Recycler<T> : MonoBehaviour {
 			DeactivateCell(cell);
 		}
 
+		m_spawnedItems.Clear();
+
 		// cleanup... should only be required if somehow shit is left in the holder.
 		if (m_holder == null) { return; }
 		for (int a = 0; a < m_holder.transform.childCount; a++) {

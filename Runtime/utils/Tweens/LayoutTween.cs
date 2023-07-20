@@ -47,7 +47,7 @@ public class LayoutTween : BaseTween {
 	[ContextMenu("Tween/Copy/Start")]
 	protected override void CopyTransformToStartTween() {
 		base.CopyTransformToStartTween();
-		LogUtils.LogPriority("HMMM1");
+
 		Copy(m_dataStart);
 	}
 

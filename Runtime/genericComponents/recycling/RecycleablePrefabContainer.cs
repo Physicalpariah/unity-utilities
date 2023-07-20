@@ -102,7 +102,7 @@ public class RecycleablePrefabContainer {
 			recyclable = m_inactiveItems[a];
 			if (recyclable != null) {
 				if (recyclable.gameObject != null) {
-					LogUtils.LogPriority("Getting inactive item: " + recyclable.m_recycleData.m_uniqueID);
+
 					ActivateItem(recyclable);
 					return recyclable;
 				}
@@ -111,7 +111,7 @@ public class RecycleablePrefabContainer {
 				m_inactiveItems.Remove(m_inactiveItems[a]);
 			}
 		}
-		LogUtils.LogPriority("Getting inactive item: " + recyclable.m_recycleData.m_uniqueID);
+
 		return recyclable;
 	}
 
@@ -133,7 +133,7 @@ public class RecycleablePrefabContainer {
 		m_spawnedItems.Add(recyclable);
 		m_activeItems.Add(recyclable);
 
-		LogUtils.LogPriority("Creating new prefab: " + recyclable.m_recycleData.m_uniqueID);
+
 		return recyclable;
 	}
 
@@ -172,7 +172,7 @@ public class RecycleablePrefabContainer {
 			ActivateItem(active);
 		}
 
-		LogUtils.LogPriority("Getting existing active item: " + active.m_recycleData.m_uniqueID);
+
 		return active;
 	}
 

@@ -69,7 +69,7 @@ public class BaseTween : MonoBehaviour {
 
 
 	protected virtual void CopyTransformToEndTween() {
-		LogUtils.LogPriority("HMMM2");
+
 	}
 
 
