@@ -1,6 +1,7 @@
 //  Created by Matt Purchase.
 //  Copyright (c) 2021 Matt Purchase. All rights reserved.
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ public class Recycler<T> : MonoBehaviour {
 	public List<GameObject> m_spawnedItems;
 	[SerializeField] protected GameObject m_spawnablePrefab;
 	[SerializeField] protected GameObject m_holder;
+
+	public bool m_spawnsOverTime = false;
+	public float m_spawnIntervalInSeconds = 0.1f;
 
 
 	protected int m_activeItems {
@@ -83,13 +87,29 @@ public class Recycler<T> : MonoBehaviour {
 		// 	return;
 		// }
 
-		for (int a = 0; a < data.Count; a++) {
-
-			GameObject cell = CreateCell(data[a]);
+		if (m_spawnsOverTime) {
+			StartCoroutine(DoSpawn(data));
+		}
+		else {
+			SpawnInstant(data);
 		}
 
 		if (e_allItemsSpawned != null) {
 			e_allItemsSpawned();
+		}
+	}
+
+	private void SpawnInstant(List<T> data) {
+		for (int a = 0; a < data.Count; a++) {
+			GameObject cell = CreateCell(data[a]);
+		}
+	}
+
+	private IEnumerator DoSpawn(List<T> data) {
+		WaitForSeconds sec = new(m_spawnIntervalInSeconds);
+		for (int a = 0; a < data.Count; a++) {
+			GameObject cell = CreateCell(data[a]);
+			yield return sec;
 		}
 	}
 
