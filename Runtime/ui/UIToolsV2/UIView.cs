@@ -40,6 +40,7 @@ public class UIView : MonoBehaviour, IView {
 
 	public virtual void Close() {
 		gameObject.SetActive(false);
+		Unsubscribe();
 	}
 
 	public virtual void UpdateView() {
