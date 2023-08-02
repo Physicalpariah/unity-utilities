@@ -50,6 +50,14 @@ public class UIView : MonoBehaviour, IView {
 	public virtual void OnViewUpdate() {
 
 	}
+
+	private void OnDestroy() {
+		Unsubscribe();
+	}
+
+	public virtual void Unsubscribe() {
+
+	}
 	// Private Functions
 
 
