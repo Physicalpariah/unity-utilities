@@ -7,6 +7,8 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+using UnityEngine;
+
 
 public static class EnumerableExtension {
 
@@ -29,5 +31,15 @@ public static class EnumerableExtension {
 
 	public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) {
 		return source.OrderBy(x => Guid.NewGuid());
+	}
+
+	public static GameObject FindChildWithTag(this GameObject source, string tag) {
+		var tags = GameObject.FindGameObjectsWithTag(tag);
+		foreach (GameObject obj in tags) {
+			if (obj.transform.IsChildOf(source.transform)) {
+				return obj;
+			}
+		}
+		return null;
 	}
 }
