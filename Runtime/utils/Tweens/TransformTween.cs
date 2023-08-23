@@ -20,8 +20,8 @@ public class TransformTween : BaseTween {
 	protected override void Apply(float lerp = 0) {
 		base.Apply(lerp);
 
-		m_transform.position = LerpStuff(m_transform.position, m_dataStart.pos, m_dataEnd.pos, lerp);
-		m_transform.rotation = Quaternion.Euler(LerpStuff(m_transform.rotation.eulerAngles, m_dataStart.rot, m_dataEnd.rot, lerp));
+		m_transform.localPosition = LerpStuff(m_transform.position, m_dataStart.pos, m_dataEnd.pos, lerp);
+		m_transform.localRotation = Quaternion.Euler(LerpStuff(m_transform.rotation.eulerAngles, m_dataStart.rot, m_dataEnd.rot, lerp));
 		m_transform.localScale = LerpStuff(m_transform.localScale, m_dataStart.scale, m_dataEnd.scale, lerp);
 	}
 
