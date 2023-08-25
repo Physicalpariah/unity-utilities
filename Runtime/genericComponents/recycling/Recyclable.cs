@@ -24,6 +24,10 @@ public class Recyclable : MonoBehaviour {
 		ShutDown();
 	}
 
+	private void OnDisable() {
+		ShutDown();
+	}
+
 	private void OnAppplicationQuit() {
 		CheckInitBalance();
 		ShutDown();
