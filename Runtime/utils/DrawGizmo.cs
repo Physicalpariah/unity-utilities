@@ -96,6 +96,17 @@ public class DrawGizmo : MonoBehaviour {
 						}
 						break;
 					}
+				case (n_gizmoDrawStyle.square): {
+						if (construct.m_renderStyle == n_renderingStyle.wire) {
+							// Handles.DrawWireDisc(transform.position, Vector3.up, construct.m_scale);
+							Gizmos.DrawWireCube(transform.position, new Vector3(construct.m_scale, 0.01f, construct.m_scale));
+						}
+						else {
+							// Handles.Draw(transform.position, Vector3.up, construct.m_scale);
+							Gizmos.DrawCube(transform.position, new Vector3(construct.m_scale, 0.01f, construct.m_scale));
+						}
+						break;
+					}
 				case (n_gizmoDrawStyle.text): {
 						GUIStyle style = new GUIStyle();
 						style.normal.textColor = construct.m_color;
@@ -165,6 +176,7 @@ public enum n_gizmoDrawStyle {
 	circle,
 	text,
 	arrow,
+	square,
 }
 
 public enum n_renderingStyle {
