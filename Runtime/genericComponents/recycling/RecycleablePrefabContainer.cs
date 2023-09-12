@@ -23,6 +23,7 @@ public class RecycleablePrefabContainer {
 		m_activeItems = new List<Recyclable>();
 		m_inactiveItems = new List<Recyclable>();
 		m_spawnablePrefab = prefab;
+		m_maxSpawns = prefab.GetComponent<Recyclable>().m_recycleData.m_maxSpawns;
 
 		if (m_deactivatedHolder == null) {
 			m_deactivatedHolder = GameObject.Find("deactivated-recycleable-container");
