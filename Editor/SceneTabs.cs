@@ -75,7 +75,7 @@ public class SceneTabs : EditorWindow {
 
 				if (GUILayout.Button(scene.name)) {
 					string path = AssetDatabase.GetAssetPath(scene);
-					EditorSceneManager.OpenScene(path);
+					EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
 				}
 				var rect = GUILayoutUtility.GetLastRect();
 				// LogUtils.Log(rect.GetType());
