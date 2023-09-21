@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 using System.IO;
@@ -75,6 +76,7 @@ public class SceneTabs : EditorWindow {
 
 				if (GUILayout.Button(scene.name)) {
 					string path = AssetDatabase.GetAssetPath(scene);
+					NavMesh.RemoveAllNavMeshData();
 					EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
 				}
 				var rect = GUILayoutUtility.GetLastRect();
