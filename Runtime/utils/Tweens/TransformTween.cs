@@ -14,15 +14,25 @@ public class TransformTween : BaseTween {
 	[SerializeField] private TransformTweenData m_dataStart;
 	[SerializeField] private TransformTweenData m_dataEnd;
 	[SerializeField] private Transform m_transform;
+
+	[SerializeField] private bool m_position = true;
+	[SerializeField] private bool m_rotation = true;
+	[SerializeField] private bool m_scale = true;
 	// Unity Callbacks
 
 	// Public Functions
 	protected override void Apply(float lerp = 0) {
 		base.Apply(lerp);
 
-		m_transform.localPosition = LerpStuff(m_transform.position, m_dataStart.pos, m_dataEnd.pos, lerp);
-		m_transform.localRotation = Quaternion.Euler(LerpStuff(m_transform.rotation.eulerAngles, m_dataStart.rot, m_dataEnd.rot, lerp));
-		m_transform.localScale = LerpStuff(m_transform.localScale, m_dataStart.scale, m_dataEnd.scale, lerp);
+		if (m_position) {
+			m_transform.localPosition = LerpStuff(m_transform.position, m_dataStart.pos, m_dataEnd.pos, lerp);
+		}
+		if (m_rotation) {
+			m_transform.localRotation = Quaternion.Euler(LerpStuff(m_transform.rotation.eulerAngles, m_dataStart.rot, m_dataEnd.rot, lerp));
+		}
+		if (m_scale) {
+			m_transform.localScale = LerpStuff(m_transform.localScale, m_dataStart.scale, m_dataEnd.scale, lerp);
+		}
 	}
 
 	private Vector3 LerpStuff(Vector3 element, Vector3 start, Vector3 end, float lerp) {
