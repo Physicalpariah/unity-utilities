@@ -14,6 +14,22 @@ public class LocalisableEditorField : PropertyDrawer {
 	public string m_lastValue;
 	public bool m_isSet = false;
 	private bool m_initialCheck = false;
+	private bool m_bigMode = false;
+
+	private string m_textAreaValue;
+
+	const float baseValueIndent = 150;
+	const float minHeight = 18;
+
+	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+		// return base.GetPropertyHeight(property, label);
+		if (m_bigMode) {
+			return 120;
+		}
+		else {
+			return minHeight;
+		}
+	}
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 		// Using BeginProperty / EndProperty on the parent property means that
@@ -27,10 +43,29 @@ public class LocalisableEditorField : PropertyDrawer {
 		var indent = EditorGUI.indentLevel;
 		EditorGUI.indentLevel = 0;
 
+		float baseValueIndent = 150;
+		if (m_isSet == true) {
+			baseValueIndent = 60;
+		}
+
 		// Calculate rects
-		var baseValueRect = new Rect(position.x, position.y, position.width - 120, position.height);
+		var baseValueRect = new Rect(position.x, position.y, position.width - baseValueIndent, position.height);
 		var labelRect = new Rect(position.x + 2 + baseValueRect.width, position.y, 90, position.height);
-		var buttonRect = new Rect(position.x + 2 + baseValueRect.width + 90, position.y, 30, position.height);
+		var buttonRect = new Rect(position.x + 2 + baseValueRect.width + labelRect.width, position.y, 30, position.height);
+		var fieldButtonRect = new Rect(position.x + 2 + baseValueRect.width + labelRect.width + buttonRect.width, position.y, 30, position.height);
+		var charCountRect = new Rect(position.x, position.height + 5, position.width, minHeight);
+
+		if (m_isSet) {
+			buttonRect = new Rect(position.x + 2 + baseValueRect.width, position.y, 30, position.height);
+			fieldButtonRect = new Rect(position.x + 2 + baseValueRect.width + buttonRect.width, position.y, 30, position.height);
+		}
+
+		if (m_bigMode) {
+			baseValueRect = new Rect(position.x, position.y + minHeight, position.width, position.height - minHeight - minHeight);
+			labelRect = new Rect(position.x, position.y, position.width - 60, minHeight);
+			buttonRect = new Rect(position.x + labelRect.width, position.y, 30, minHeight);
+			fieldButtonRect = new Rect(position.x + labelRect.width + buttonRect.width, position.y, 30, minHeight);
+		}
 
 
 		string value = property.FindPropertyRelative("m_value").stringValue;
@@ -43,7 +78,15 @@ public class LocalisableEditorField : PropertyDrawer {
 
 
 		if (!m_isSet) {
-			EditorGUI.PropertyField(baseValueRect, property.FindPropertyRelative("m_value"), GUIContent.none);
+			if (m_bigMode) {
+				EditorStyles.textArea.wordWrap = true;
+				property.FindPropertyRelative("m_value").stringValue = EditorGUI.TextArea(baseValueRect, property.FindPropertyRelative("m_value").stringValue);
+				EditorGUI.LabelField(charCountRect, value.Length.ToString());
+			}
+			else {
+				EditorGUI.PropertyField(baseValueRect, property.FindPropertyRelative("m_value"), GUIContent.none);
+			}
+
 			if (value != m_lastValue) {
 				m_lastValue = value;
 			}
@@ -84,6 +127,15 @@ public class LocalisableEditorField : PropertyDrawer {
 
 		if (GUI.Button(buttonRect, buttonTitle)) {
 			ConfirmValue(property, value);
+		}
+
+		string fieldTitle = "T";
+		if (m_bigMode) {
+			fieldTitle = "t";
+		}
+
+		if (GUI.Button(fieldButtonRect, fieldTitle)) {
+			m_bigMode = !m_bigMode;
 		}
 
 
