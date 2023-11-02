@@ -77,10 +77,10 @@ public class LocalisableEditorField : PropertyDrawer {
 
 
 
+		EditorStyles.textArea.wordWrap = true;
+		EditorStyles.textField.wordWrap = true;
 		if (!m_isSet) {
 			if (m_bigMode) {
-				EditorStyles.textArea.wordWrap = true;
-				EditorStyles.textField.wordWrap = true;
 				property.FindPropertyRelative("m_value").stringValue = EditorGUI.TextArea(baseValueRect, property.FindPropertyRelative("m_value").stringValue);
 				EditorGUI.LabelField(charCountRect, value.Length.ToString());
 			}
