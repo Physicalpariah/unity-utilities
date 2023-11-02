@@ -76,7 +76,7 @@ public class LocalisableEditorField : PropertyDrawer {
 		}
 
 
-
+		EditorStyles.label.wordWrap = true;
 		EditorStyles.textArea.wordWrap = true;
 		EditorStyles.textField.wordWrap = true;
 		if (!m_isSet) {
