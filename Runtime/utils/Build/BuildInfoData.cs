@@ -22,7 +22,7 @@ public class BuildInfoData : ScriptableObject {
 				_instance = Resources.Load("data/info/build-info") as BuildInfoData;
 
 				if (_instance == null) {
-					Exception ex = new Exception("Whoa no build info, should be located at Resources/data/build-info/build-info");
+					Exception ex = new Exception("Whoa no build info, should be located at Resources/data/info/build-info");
 					Debug.LogException(ex);
 				}
 			}
