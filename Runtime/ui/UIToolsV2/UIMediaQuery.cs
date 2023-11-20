@@ -12,8 +12,9 @@ public class UIMediaQuery : MonoBehaviour {
 	// Dependencies
 
 	// Properties
-	[SerializeField]
-	private List<MediaQuery> m_queries;
+
+
+	[SerializeField] private List<MediaQuery> m_queries;
 	private n_mediaOrientation m_orientation;
 	public Dictionary<string, string> oh_damn;
 
@@ -21,6 +22,7 @@ public class UIMediaQuery : MonoBehaviour {
 	private void OnEnable() {
 		Repaint();
 	}
+
 	// Unity Callbacks
 	private void Update() {
 		bool repaints = false;
@@ -40,7 +42,7 @@ public class UIMediaQuery : MonoBehaviour {
 
 		foreach (MediaQuery query in m_queries) {
 			query.Deactivate();
-			if (m_orientation == query.m_trigger.m_orientation) {
+			if (m_orientation == query.m_trigger.m_orientation || query.m_trigger.m_orientation == n_mediaOrientation.none) {
 				foreach (n_deviceType typ in query.m_trigger.m_devices) {
 					if (DeviceUtils.m_deviceType == typ) {
 						activeOrientationQuery = query;
@@ -80,12 +82,10 @@ public class UIMediaQuery : MonoBehaviour {
 
 [Serializable]
 public class MediaQuery {
-	public string m_name;
-	public MediaTrigger m_trigger;
+	public MediaQueryTrigger m_trigger;
 	public List<MediaAction> m_actions;
 
 	public void Activate() {
-
 		foreach (MediaAction act in m_actions) {
 			act.Apply();
 		}
@@ -96,27 +96,17 @@ public class MediaQuery {
 	}
 }
 
-[Serializable]
-public struct MediaTrigger {
-	public n_mediaOrientation m_orientation;
-	public List<n_deviceType> m_devices;
-}
 
 [Serializable]
 public struct MediaAction {
 	public string m_name;
 	public n_mediaActionType m_type;
 	[Header("Reparenting")]
-	// [HideIf("m_type", n_mediaActionType.layoutElement)]
 	public GameObject m_target;
-	// [HideIf("m_type", n_mediaActionType.layoutElement)]
 	public GameObject m_parent;
 	[Header("Layout Element")]
-	// [HideIf("m_type", n_mediaActionType.reparent)]
 	public LayoutElement m_group;
-	// [HideIf("m_type", n_mediaActionType.reparent)]
 	public Vector2 m_minSize;
-	// [HideIf("m_type", n_mediaActionType.reparent)]
 	public Vector2 m_prefSize;
 
 	public void Apply() {
