@@ -108,14 +108,14 @@ public class MediaQuery {
 public struct MediaAction {
 	public string m_name;
 	public n_mediaActionType m_type;
-	[Header("Reparenting")]
+	// [Header("Reparenting")]
 	public GameObject m_target;
 	public GameObject m_parent;
-	[Header("Layout Element")]
+	// [Header("Layout Element")]
 	public LayoutElement m_group;
 	public Vector2 m_minSize;
 	public Vector2 m_prefSize;
-	[Header("Visibility")]
+	// [Header("Visibility")]
 	public GameObject m_visibilityTarget;
 	public bool m_isShown;
 
