@@ -15,43 +15,32 @@ public class UIMediaQuery : MonoBehaviour {
 
 
 	[SerializeField] private List<MediaQuery> m_queries;
-	private n_mediaOrientation m_orientation;
-	public Dictionary<string, string> oh_damn;
-	private Vector2 m_prevScreenSize = Vector2.zero;
 
 	// Initalisation Functions
 	private void OnEnable() {
-		Repaint();
+		UIMediaQueryHandler.e_mediaChanged += Repaint;
+	}
+
+	private void OnDestroy() {
+		Unsubscribe();
+	}
+
+	private void OnApplicationQuit() {
+		Unsubscribe();
+	}
+
+	private void Unsubscribe() {
+		UIMediaQueryHandler.e_mediaChanged -= Repaint;
 	}
 
 	// Unity Callbacks
-	private void Update() {
-		bool repaints = false;
-
-		Vector2 res = GetResolution();
-		if (m_prevScreenSize != res) { repaints = true; }
-		if (repaints == false) { return; }
-		m_prevScreenSize = res;
-
-		Repaint();
-	}
-
-	private Vector2 GetResolution() {
-		return new Vector2(Screen.width, Screen.height);
-	}
-
-	private void Repaint() {
-
-		SetOrientation();
-
+	private void Repaint(MediaQueryTrigger trigger) {
 		MediaQuery activeOrientationQuery = null;
-
-
 		foreach (MediaQuery query in m_queries) {
 			query.Deactivate();
-			if (m_orientation == query.m_trigger.m_orientation || query.m_trigger.m_orientation == n_mediaOrientation.none) {
+			if (trigger.m_orientation == query.m_trigger.m_orientation || query.m_trigger.m_orientation == n_mediaOrientation.none) {
 				foreach (n_deviceType typ in query.m_trigger.m_devices) {
-					if (DeviceUtils.m_deviceType == typ) {
+					if (trigger.m_devices.Contains(typ)) {
 						activeOrientationQuery = query;
 					}
 				}
@@ -67,23 +56,6 @@ public class UIMediaQuery : MonoBehaviour {
 	// Public Functions
 
 	// Private Functions
-	private void SetOrientation() {
-		if (DeviceUtils.isScreenPortrait) {
-			m_orientation = n_mediaOrientation.portrait;
-		}
-		else {
-			m_orientation = n_mediaOrientation.landscape;
-		}
-	}
-
-	private bool OrientationIsPortrait() {
-		if (m_orientation == n_mediaOrientation.portrait) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 }
 
 

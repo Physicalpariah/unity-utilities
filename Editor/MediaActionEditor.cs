@@ -67,7 +67,5 @@ public class MediaActionEditor : PropertyDrawer {
 					break;
 				}
 		}
-
-
 	}
 }
