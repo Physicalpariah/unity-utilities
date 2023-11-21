@@ -17,6 +17,7 @@ public class UIMediaQuery : MonoBehaviour {
 	[SerializeField] private List<MediaQuery> m_queries;
 	private n_mediaOrientation m_orientation;
 	public Dictionary<string, string> oh_damn;
+	private Vector2 m_prevScreenSize = Vector2.zero;
 
 	// Initalisation Functions
 	private void OnEnable() {
@@ -27,10 +28,16 @@ public class UIMediaQuery : MonoBehaviour {
 	private void Update() {
 		bool repaints = false;
 
-		if (DeviceUtils.isScreenPortrait != OrientationIsPortrait()) { repaints = true; }
+		Vector2 res = GetResolution();
+		if (m_prevScreenSize != res) { repaints = true; }
 		if (repaints == false) { return; }
+		m_prevScreenSize = res;
 
 		Repaint();
+	}
+
+	private Vector2 GetResolution() {
+		return new Vector2(Screen.width, Screen.height);
 	}
 
 	private void Repaint() {
