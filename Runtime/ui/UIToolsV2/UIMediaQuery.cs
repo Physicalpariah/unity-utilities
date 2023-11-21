@@ -102,12 +102,14 @@ public struct MediaAction {
 	public string m_name;
 	public n_mediaActionType m_type;
 	[Header("Reparenting")]
-	public GameObject m_target;
+	public UIView m_target;
 	public GameObject m_parent;
 	[Header("Layout Element")]
 	public LayoutElement m_group;
 	public Vector2 m_minSize;
 	public Vector2 m_prefSize;
+	[Header("Visibility")]
+	public bool m_isShown;
 
 	public void Apply() {
 		switch (m_type) {
@@ -142,6 +144,7 @@ public struct MediaAction {
 public enum n_mediaActionType {
 	reparent,
 	layoutElement,
+	toggleVisibility,
 }
 
 public enum n_mediaOrientation {
