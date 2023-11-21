@@ -109,6 +109,7 @@ public struct MediaAction {
 	public Vector2 m_minSize;
 	public Vector2 m_prefSize;
 	[Header("Visibility")]
+	public GameObject m_visibilityTarget;
 	public bool m_isShown;
 
 	public void Apply() {
@@ -119,6 +120,10 @@ public struct MediaAction {
 				}
 			case (n_mediaActionType.layoutElement): {
 					ApplyLayout();
+					break;
+				}
+			case (n_mediaActionType.toggleVisibility): {
+					ApplyVisibility();
 					break;
 				}
 		}
@@ -136,6 +141,10 @@ public struct MediaAction {
 		m_group.minWidth = m_minSize.x;
 		m_group.preferredHeight = m_prefSize.y;
 		m_group.preferredWidth = m_prefSize.x;
+	}
+
+	private void ApplyVisibility() {
+		m_visibilityTarget.gameObject.SetActive(m_isShown);
 	}
 }
 
