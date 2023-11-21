@@ -102,7 +102,7 @@ public struct MediaAction {
 	public string m_name;
 	public n_mediaActionType m_type;
 	[Header("Reparenting")]
-	public UIView m_target;
+	public GameObject m_target;
 	public GameObject m_parent;
 	[Header("Layout Element")]
 	public LayoutElement m_group;
