@@ -28,7 +28,6 @@ public class UIViewController : MonoBehaviour {
 		if (m_window == null) { throw new Exception("Nope, no window found for this view."); }
 		m_window.RegisterView(this);
 
-
 		foreach (UIConnection con in m_connections) {
 			con.Apply(m_window);
 		}
@@ -36,13 +35,24 @@ public class UIViewController : MonoBehaviour {
 		SubBackButton();
 	}
 
-	private void EnableViews() {
-		for (int a = 0; a < transform.childCount; a++) {
-			transform.GetChild(a).gameObject.SetActive(true);
-		}
+	private void Subscribe() {
+		UIMediaQueryHandler.e_mediaChanged += OnOrientationChanged;
+	}
+
+	private void Unsubscribe() {
+		UIMediaQueryHandler.e_mediaChanged -= OnOrientationChanged;
 	}
 
 
+	// Unity Callbacks
+	private void OnDestroy() {
+		Unsubscribe();
+	}
+	private void OnApplicationQuit() {
+		Unsubscribe();
+	}
+
+	// Public Functions
 	public UIConnection GetConnectionToScreenByType<T>() {
 		foreach (UIConnection conn in m_connections) {
 			if (conn is T) {
@@ -53,9 +63,6 @@ public class UIViewController : MonoBehaviour {
 		return null;
 	}
 
-	// Unity Callbacks
-
-	// Public Functions
 
 	public void RegisterView(IView view) {
 		if (m_views == null) {
@@ -92,15 +99,28 @@ public class UIViewController : MonoBehaviour {
 			}
 			firstExclusive.Open();
 		}
+		Subscribe();
+	}
+
+	public virtual void OnOrientationChanged(MediaQueryTrigger trigger) {
+
+	}
+
+	// Private Functions
+	private void EnableViews() {
+		for (int a = 0; a < transform.childCount; a++) {
+			transform.GetChild(a).gameObject.SetActive(true);
+		}
 	}
 
 	public virtual void Close() {
 		foreach (IView view in m_views) {
 			view.Close();
 		}
+		Unsubscribe();
 	}
 
-	// Private Functions
+
 	private void SubBackButton() {
 		if (m_btnBack == null) { return; }
 		UIUtils.SubscribeButton(m_btnBack, m_window.Back);
