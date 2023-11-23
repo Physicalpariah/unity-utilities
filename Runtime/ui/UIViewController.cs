@@ -40,6 +40,9 @@ public class UIViewController : MonoBehaviour {
 	}
 
 	private void Unsubscribe() {
+		foreach (IView view in m_views) {
+			view.Unsubscribe();
+		}
 		UIMediaQueryHandler.e_mediaChanged -= OnOrientationChanged;
 	}
 

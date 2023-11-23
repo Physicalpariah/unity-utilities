@@ -12,6 +12,7 @@ public interface IView {
 	void Open();
 	void UpdateView();
 	void OnViewUpdate();
+	void Unsubscribe();
 }
 
 public class UIView : MonoBehaviour, IView {
