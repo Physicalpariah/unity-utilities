@@ -48,4 +48,8 @@ public class UIListView<T> : Recycler<T>, IView {
 	public virtual void OnViewUpdate() {
 
 	}
+
+	public virtual void Unsubscribe() {
+
+	}
 }
