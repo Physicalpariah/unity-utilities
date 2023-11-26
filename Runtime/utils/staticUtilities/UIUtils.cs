@@ -35,6 +35,11 @@ public static class UIUtils {
 		field.onEndEdit.AddListener(function);
 	}
 
+	public static void SubscribeSlider(Slider slider, UnityEngine.Events.UnityAction<float> function) {
+		slider.onValueChanged.RemoveAllListeners();
+		slider.onValueChanged.AddListener(function);
+	}
+
 	public static void SubscribeDropdown(Dropdown dropdown, List<string> names, UnityEngine.Events.UnityAction<int> action) {
 		dropdown.ClearOptions();
 		List<Dropdown.OptionData> dropdownOptions = new List<Dropdown.OptionData>();
