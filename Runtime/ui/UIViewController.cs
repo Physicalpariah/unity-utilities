@@ -55,6 +55,10 @@ public class UIViewController : MonoBehaviour {
 		Unsubscribe();
 	}
 
+	private void OnDisable() {
+		Unsubscribe();
+	}
+
 	// Public Functions
 	public UIConnection GetConnectionToScreenByType<T>() {
 		foreach (UIConnection conn in m_connections) {
