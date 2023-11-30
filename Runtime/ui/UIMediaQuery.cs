@@ -29,6 +29,10 @@ public class UIMediaQuery : MonoBehaviour {
 		Unsubscribe();
 	}
 
+	private void OnDisable() {
+		Unsubscribe();
+	}
+
 	private void Unsubscribe() {
 		UIMediaQueryHandler.e_mediaChanged -= Repaint;
 	}
