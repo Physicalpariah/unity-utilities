@@ -20,8 +20,9 @@ public class UIMediaQueryHandler : MonoBehaviour {
 
 	// Initalisation Functions
 
-	private void Start() {
+	private void OnEnable() {
 		Repaint();
+		LogUtils.LogPriority("Repainted");
 	}
 
 	private void OnDestroy() {
