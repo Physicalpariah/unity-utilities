@@ -20,12 +20,7 @@ public class UIMediaQueryHandler : MonoBehaviour {
 
 	// Initalisation Functions
 
-	private void OnEnable() {
-		StartCoroutine(WaitThenFire());
-	}
-
-	private IEnumerator WaitThenFire() {
-		yield return new WaitForSeconds(1);
+	private void Start() {
 		Repaint();
 	}
 
