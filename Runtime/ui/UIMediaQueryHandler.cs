@@ -13,6 +13,8 @@ public class UIMediaQueryHandler : MonoBehaviour {
 	private n_mediaOrientation m_orientation;
 	private Vector2 m_prevScreenSize = Vector2.zero;
 
+	public static MediaQueryTrigger m_currentTrigger { get; private set; }
+
 	public delegate void d_mediaChanged(MediaQueryTrigger trigger);
 	public static event d_mediaChanged e_mediaChanged;
 
@@ -25,6 +27,14 @@ public class UIMediaQueryHandler : MonoBehaviour {
 	private IEnumerator WaitThenFire() {
 		yield return new WaitForSeconds(1);
 		Repaint();
+	}
+
+	private void OnDestroy() {
+		m_currentTrigger = null;
+	}
+
+	private void OnApplicationQuit() {
+		m_currentTrigger = null;
 	}
 
 	// Unity Callbacks
@@ -61,6 +71,8 @@ public class UIMediaQueryHandler : MonoBehaviour {
 			}
 		}
 
+
+		m_currentTrigger = trigger;
 		if (e_mediaChanged != null) {
 			e_mediaChanged(trigger);
 		}
