@@ -19,7 +19,6 @@ public class UIMediaQuery : MonoBehaviour {
 	// Initalisation Functions
 	private void OnEnable() {
 		UIMediaQueryHandler.e_mediaChanged += Repaint;
-		LogUtils.LogPriority(UIMediaQueryHandler.m_currentTrigger);
 		Repaint(UIMediaQueryHandler.m_currentTrigger);
 	}
 
