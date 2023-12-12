@@ -80,6 +80,7 @@ public class UIViewController : MonoBehaviour {
 	}
 
 	public virtual void Open() {
+		gameObject.SetActive(true);
 		IView firstExclusive = null;
 		foreach (IView view in m_views) {
 			switch (view._viewData.m_viewType) {
@@ -125,6 +126,8 @@ public class UIViewController : MonoBehaviour {
 			view.Close();
 		}
 		Unsubscribe();
+
+		gameObject.SetActive(false);
 	}
 
 
