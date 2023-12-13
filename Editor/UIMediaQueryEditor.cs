@@ -1,0 +1,27 @@
+//  Created by Matt Purchase.
+//  Copyright (c) 2023 Matt Purchase. All rights reserved.
+using System.Collections.Generic;
+using System;
+using UnityEditor;
+using UnityEngine;
+
+
+[CustomEditor(typeof(UIMediaQuery))]
+public class UIMediaQueryEditor : Editor {
+
+	// Properties
+
+	// Public Functions
+	public override void OnInspectorGUI() {
+		UIMediaQuery handler = (UIMediaQuery)target;
+		DrawDefaultInspector();
+		if (handler.m_queries.Count > 0) {
+			GUILayout.Label("Apply Layout:");
+			for (int a = 0; a < handler.m_queries.Count; a++) {
+				if (GUILayout.Button(handler.m_queries[a].m_trigger.name)) {
+					handler.m_queries[a].Activate();
+				}
+			}
+		}
+	}
+}

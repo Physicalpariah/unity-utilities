@@ -14,7 +14,7 @@ public class UIMediaQuery : MonoBehaviour {
 	// Properties
 
 
-	[SerializeField] private List<MediaQuery> m_queries;
+	public List<MediaQuery> m_queries;
 
 	// Initalisation Functions
 	private void OnEnable() {
