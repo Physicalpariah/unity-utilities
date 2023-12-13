@@ -10,7 +10,8 @@ using UnityEngine;
 public class UIMediaQueryEditor : Editor {
 
 	// Properties
-
+	public delegate void d_queryFired(MediaQueryTrigger trigger);
+	public static event d_queryFired e_queryFired;
 	// Public Functions
 	public override void OnInspectorGUI() {
 		UIMediaQuery handler = (UIMediaQuery)target;
@@ -22,12 +23,18 @@ public class UIMediaQueryEditor : Editor {
 				if (GUILayout.Button(handler.m_queries[a].m_trigger.name)) {
 					handler.m_queries[a].Activate();
 
+					if (e_queryFired != null) {
+						e_queryFired(handler.m_queries[a].m_trigger);
+					}
+
 					UIMediaQuery[] subQueries = handler.GetComponentsInChildren<UIMediaQuery>();
 
 					for (int b = 0; b < subQueries.Length; b++) {
 						foreach (MediaQuery query in subQueries[b].m_queries) {
 							if (query.m_trigger.name == handler.m_queries[a].m_trigger.name) {
 								query.Activate();
+
+
 							}
 						}
 					}
