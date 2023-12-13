@@ -25,7 +25,7 @@ public class UIMediaQueryEditor : Editor {
 					UIMediaQuery[] subQueries = handler.GetComponentsInChildren<UIMediaQuery>();
 
 					for (int b = 0; b < subQueries.Length; b++) {
-						foreach (MediaQuery query in subQueries[a].m_queries) {
+						foreach (MediaQuery query in subQueries[b].m_queries) {
 							if (query.m_trigger.name == handler.m_queries[a].m_trigger.name) {
 								query.Activate();
 							}
