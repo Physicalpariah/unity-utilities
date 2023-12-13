@@ -124,7 +124,7 @@ public struct MediaAction {
 		bool canMove = true;
 
 #if UNITY_EDITOR
-		if (PrefabUtility.GetPrefabInstanceStatus(m_target) != PrefabInstanceStatus.NotAPrefab) {
+		if (PrefabUtility.GetPrefabInstanceStatus(m_target) != PrefabInstanceStatus.Connected) {
 			canMove = false;
 		}
 #endif
