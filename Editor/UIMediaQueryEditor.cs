@@ -17,11 +17,25 @@ public class UIMediaQueryEditor : Editor {
 		DrawDefaultInspector();
 		if (handler.m_queries.Count > 0) {
 			GUILayout.Label("Apply Layout:");
+
 			for (int a = 0; a < handler.m_queries.Count; a++) {
 				if (GUILayout.Button(handler.m_queries[a].m_trigger.name)) {
 					handler.m_queries[a].Activate();
+
+					UIMediaQuery[] subQueries = handler.GetComponentsInChildren<UIMediaQuery>();
+
+					for (int b = 0; b < subQueries.Length; b++) {
+						foreach (MediaQuery query in subQueries[a].m_queries) {
+							if (query.m_trigger.name == handler.m_queries[a].m_trigger.name) {
+								query.Activate();
+							}
+						}
+					}
 				}
 			}
+
+
+
 		}
 	}
 }
