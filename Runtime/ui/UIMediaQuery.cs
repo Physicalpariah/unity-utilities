@@ -5,6 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 // using Sirenix.OdinInspector;
 
 
@@ -116,6 +120,16 @@ public struct MediaAction {
 	private void ApplyParenting() {
 		if (m_target == null) { return; }
 		if (m_parent == null) { return; }
+
+		bool canMove = true;
+
+#if UNITY_EDITOR
+		if (PrefabUtility.GetPrefabInstanceStatus(m_target) != PrefabInstanceStatus.NotAPrefab) {
+			canMove = false;
+		}
+#endif
+
+		if (canMove == false) { return; }
 		m_target.transform.SetParent(m_parent.transform, false);
 	}
 
