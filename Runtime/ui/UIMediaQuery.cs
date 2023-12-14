@@ -69,17 +69,19 @@ public class UIMediaQuery : MonoBehaviour {
 [Serializable]
 public class MediaQuery {
 	public string m_name;
+	public GameObject m_container;
 	public MediaQueryTrigger m_trigger;
 	public List<MediaAction> m_actions;
 
 	public void Activate() {
+		m_container.SetActive(true);
 		foreach (MediaAction act in m_actions) {
 			act.Apply();
 		}
 	}
 
 	public void Deactivate() {
-
+		m_container.SetActive(false);
 	}
 }
 
