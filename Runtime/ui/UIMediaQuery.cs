@@ -14,7 +14,7 @@ public class UIMediaQuery : MonoBehaviour {
 
 	// Properties
 
-
+	public string m_activeQueryName;
 	public List<MediaQuery> m_queries;
 
 	// Initalisation Functions
@@ -48,6 +48,7 @@ public class UIMediaQuery : MonoBehaviour {
 				foreach (n_deviceType typ in query.m_trigger.m_devices) {
 					if (trigger.m_devices.Contains(typ)) {
 						activeOrientationQuery = query;
+						m_activeQueryName = query.m_name;
 					}
 				}
 			}
@@ -67,6 +68,7 @@ public class UIMediaQuery : MonoBehaviour {
 
 [Serializable]
 public class MediaQuery {
+	public string m_name;
 	public MediaQueryTrigger m_trigger;
 	public List<MediaAction> m_actions;
 
