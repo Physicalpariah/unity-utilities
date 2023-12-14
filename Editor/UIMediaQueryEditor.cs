@@ -11,7 +11,7 @@ public class UIMediaQueryEditor : Editor {
 
 	// Properties
 	public delegate void d_queryFired(MediaQueryTrigger trigger);
-	public static event d_queryFired e_queryFired;
+	public static event d_queryFired e_queryWillFire;
 	// Public Functions
 	public override void OnInspectorGUI() {
 		UIMediaQuery handler = (UIMediaQuery)target;
@@ -22,8 +22,8 @@ public class UIMediaQueryEditor : Editor {
 			for (int a = 0; a < handler.m_queries.Count; a++) {
 				if (GUILayout.Button(handler.m_queries[a].m_trigger.name)) {
 
-					if (e_queryFired != null) {
-						e_queryFired(handler.m_queries[a].m_trigger);
+					if (e_queryWillFire != null) {
+						e_queryWillFire(handler.m_queries[a].m_trigger);
 					}
 
 
