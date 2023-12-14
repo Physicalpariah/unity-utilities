@@ -21,12 +21,13 @@ public class UIMediaQueryEditor : Editor {
 
 			for (int a = 0; a < handler.m_queries.Count; a++) {
 				if (GUILayout.Button(handler.m_queries[a].m_trigger.name)) {
-					handler.m_queries[a].Activate();
 
 					if (e_queryFired != null) {
 						e_queryFired(handler.m_queries[a].m_trigger);
 					}
 
+
+					handler.m_queries[a].Activate();
 					UIMediaQuery[] subQueries = handler.GetComponentsInChildren<UIMediaQuery>();
 
 					for (int b = 0; b < subQueries.Length; b++) {
