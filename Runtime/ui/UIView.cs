@@ -72,8 +72,8 @@ public struct UIViewData {
 
 
 public enum n_viewType {
-	subView,
+	open_on_open,
 	exclusive,
-	modal,
+	close_on_open,
 }
 

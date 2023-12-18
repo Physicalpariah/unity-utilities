@@ -84,11 +84,11 @@ public class UIViewController : MonoBehaviour {
 		IView firstExclusive = null;
 		foreach (IView view in m_views) {
 			switch (view._viewData.m_viewType) {
-				case (n_viewType.subView): {
+				case (n_viewType.open_on_open): {
 						view.Open();
 						break;
 					}
-				case (n_viewType.modal): {
+				case (n_viewType.close_on_open): {
 						view.Close();
 						break;
 					}
