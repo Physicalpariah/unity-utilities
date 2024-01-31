@@ -28,7 +28,7 @@ public class UIView : MonoBehaviour, IView {
 	// Initalisation Functions
 
 	// Unity Callbacks
-	private void Start() {
+	private void Awake() {
 		m_controller = GetComponentInParent<UIViewController>();
 		if (m_controller == null) { throw new Exception("Nope, no window found for this view."); }
 		m_controller.RegisterView(this);
