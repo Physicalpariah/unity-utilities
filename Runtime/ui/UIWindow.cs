@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class UIWindow : MonoBehaviour {
@@ -16,6 +17,7 @@ public class UIWindow : MonoBehaviour {
 	[SerializeField] private List<UIViewController> m_views;
 	[SerializeField] protected UIViewController m_currentView;
 	[SerializeField] private List<UIViewController> m_history;
+	[SerializeField] private EventSystem m_eventSystem;
 	// Initalisation Functions
 
 	// Unity Callbacks
@@ -52,6 +54,11 @@ public class UIWindow : MonoBehaviour {
 	}
 
 	// Public Functions
+	public void SelectInteractable(GameObject selected) {
+		m_eventSystem.SetSelectedGameObject(selected);
+	}
+
+
 	public void RegisterView(UIViewController view) {
 		m_views.Add(view);
 	}

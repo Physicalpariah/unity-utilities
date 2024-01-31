@@ -18,6 +18,7 @@ public class UIViewController : MonoBehaviour {
 	public List<IView> m_views;
 	public List<UIConnection> m_connections;
 	public Button m_btnBack;
+	public GameObject m_firstSelected;
 
 	// Initalisation Functions
 	private void Start() {
@@ -62,6 +63,10 @@ public class UIViewController : MonoBehaviour {
 	}
 
 	// Public Functions
+	public void SetSelected(GameObject selected) {
+		m_window.SelectInteractable(selected);
+	}
+
 	public UIConnection GetConnectionToScreenByType<T>() {
 		foreach (UIConnection conn in m_connections) {
 			if (conn is T) {
@@ -110,6 +115,7 @@ public class UIViewController : MonoBehaviour {
 			firstExclusive.Open();
 		}
 		Subscribe();
+		SetSelected(m_firstSelected);
 	}
 
 	public virtual void OnOrientationChanged(MediaQueryTrigger trigger) {
