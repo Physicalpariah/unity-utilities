@@ -64,6 +64,7 @@ public class UIViewController : MonoBehaviour {
 
 	// Public Functions
 	public void SetSelected(GameObject selected) {
+		if (DeviceUtils.m_input == n_deviceInput.touch) { return; }
 		m_window.SelectInteractable(selected);
 	}
 

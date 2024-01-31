@@ -11,6 +11,7 @@ using UnityEngine.iOS;
 public static class DeviceUtils {
 
 	public static n_deviceType m_debugDevice;
+	public static n_deviceInput m_input;
 
 
 	public static bool ValidateAppleTVGen3() {
@@ -241,6 +242,12 @@ public static class DeviceUtils {
 
 
 
+}
+
+public enum n_deviceInput {
+	touch,
+	controller,
+	keyboard,
 }
 
 
