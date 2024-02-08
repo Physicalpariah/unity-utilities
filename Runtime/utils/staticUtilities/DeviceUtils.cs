@@ -14,7 +14,7 @@ public static class DeviceUtils {
 
 	public static EventHandler e_inputChanged;
 
-	public static void SetDevice(n_deviceInput input) {
+	public static void SetInputType(n_deviceInput input) {
 		m_input = input;
 		if (e_inputChanged != null) {
 			e_inputChanged(null, null);
