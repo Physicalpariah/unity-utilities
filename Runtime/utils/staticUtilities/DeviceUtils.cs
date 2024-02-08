@@ -5,14 +5,21 @@ using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_IOS
 using UnityEngine.iOS;
-
 #endif
 
 public static class DeviceUtils {
 
 	public static n_deviceType m_debugDevice;
-	public static n_deviceInput m_input;
+	public static n_deviceInput m_input { get; private set; }
 
+	public static EventHandler e_inputChanged;
+
+	public static void SetDevice(n_deviceInput input) {
+		m_input = input;
+		if (e_inputChanged != null) {
+			e_inputChanged(null, null);
+		}
+	}
 
 	public static bool ValidateAppleTVGen3() {
 		bool isDevice = false;
