@@ -18,7 +18,7 @@ public class UIViewController : MonoBehaviour {
 	public List<IView> m_views;
 	public List<UIConnection> m_connections;
 	public Button m_btnBack;
-	public GameObject m_firstSelected;
+	public List<GameObject> m_firstSelectionHeirarchy;
 
 	// Initalisation Functions
 	private void Start() {
@@ -38,6 +38,7 @@ public class UIViewController : MonoBehaviour {
 
 	private void Subscribe() {
 		UIMediaQueryHandler.e_mediaChanged += OnOrientationChanged;
+		DeviceUtils.e_inputChanged += OnInputTypeChanged;
 	}
 
 	private void Unsubscribe() {
@@ -47,6 +48,7 @@ public class UIViewController : MonoBehaviour {
 			}
 		}
 		UIMediaQueryHandler.e_mediaChanged -= OnOrientationChanged;
+		DeviceUtils.e_inputChanged -= OnInputTypeChanged;
 	}
 
 
@@ -63,6 +65,17 @@ public class UIViewController : MonoBehaviour {
 	}
 
 	// Public Functions
+	public void SelectFirst() {
+		for (int a = 0; a < m_firstSelectionHeirarchy.Count; a++) {
+			if (m_firstSelectionHeirarchy[a] != null) {
+				if (m_firstSelectionHeirarchy[a].activeInHierarchy) {
+					SetSelected(m_firstSelectionHeirarchy[a]);
+					return;
+				}
+			}
+		}
+	}
+
 	public void SetSelected(GameObject selected) {
 		if (DeviceUtils.m_input == n_deviceInput.touch) { return; }
 		m_window.SelectInteractable(selected);
@@ -116,11 +129,19 @@ public class UIViewController : MonoBehaviour {
 			firstExclusive.Open();
 		}
 		Subscribe();
-		SetSelected(m_firstSelected);
+		SelectFirst();
 	}
 
 	public virtual void OnOrientationChanged(MediaQueryTrigger trigger) {
+		if (DeviceUtils.m_input == n_deviceInput.controller) {
+			SelectFirst();
+		}
+	}
 
+	public virtual void OnInputTypeChanged(object obj, EventArgs ea) {
+		if (DeviceUtils.m_input == n_deviceInput.controller) {
+			SelectFirst();
+		}
 	}
 
 	// Private Functions
