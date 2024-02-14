@@ -37,6 +37,7 @@ public class UIView : MonoBehaviour, IView {
 	// Public Functions
 	public virtual void Open() {
 		gameObject.SetActive(true);
+		m_controller.SelectFirst();
 	}
 
 	public virtual void Close() {
