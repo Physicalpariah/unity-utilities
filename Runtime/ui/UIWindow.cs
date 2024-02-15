@@ -14,8 +14,8 @@ public class UIWindow : MonoBehaviour {
 	// Dependencies
 
 	// Properties
+	public UIViewController m_currentView { get; private set; }
 	[SerializeField] private List<UIViewController> m_views;
-	[SerializeField] protected UIViewController m_currentView;
 	[SerializeField] private List<UIViewController> m_history;
 	[SerializeField] private EventSystem m_eventSystem;
 	// Initalisation Functions
@@ -26,7 +26,6 @@ public class UIWindow : MonoBehaviour {
 
 		// hack to turn on all the children so they can register.
 		EnableViewControllers();
-
 		StartCoroutine(InitRoutine());
 	}
 
