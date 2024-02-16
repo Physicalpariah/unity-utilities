@@ -14,7 +14,7 @@ public class UIWindow : MonoBehaviour {
 	// Dependencies
 
 	// Properties
-	public UIViewController m_currentView { get; private set; }
+	[SerializeField] protected UIViewController m_currentView;
 	[SerializeField] private List<UIViewController> m_views;
 	[SerializeField] private List<UIViewController> m_history;
 	[SerializeField] private EventSystem m_eventSystem;
@@ -53,6 +53,10 @@ public class UIWindow : MonoBehaviour {
 	}
 
 	// Public Functions
+	public UIViewController GetCurrentViewController() {
+		return m_currentView;
+	}
+
 	public void SelectInteractable(GameObject selected) {
 		m_eventSystem.SetSelectedGameObject(selected);
 	}
