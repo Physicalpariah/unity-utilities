@@ -35,7 +35,7 @@ public class LocalisationString {
 	public string m_comment = "";
 	public LocalisationString() { }
 	public LocalisationString(string line) {
-		m_default = line;
+		m_default = line.ToLower(); // THIS MUST BE LOWERCASE
 		m_current = line;
 	}
 }

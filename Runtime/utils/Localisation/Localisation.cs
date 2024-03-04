@@ -78,7 +78,7 @@ public class Localisation : ScriptableObject {
 	public static string Search(string key) {
 		for (int a = 0; a < Instance.m_data.m_strings.Count; a++) {
 			LocalisationString data = Instance.m_data.m_strings[a];
-			if (data.m_default.ToLower().Contains(key.ToLower())) {
+			if (data.m_default.Contains(key.ToLower())) {
 				return data.m_default;
 			}
 		}
@@ -99,12 +99,14 @@ public class Localisation : ScriptableObject {
 		return results;
 	}
 
+
+	// NOTE: !!IMPORTANT!! for performance reasons all string keys must be stored in lower.
 	public static string Get(string key) {
 		if (Instance.m_data.Contains(key) == false) {
 			if (Application.platform == RuntimePlatform.OSXEditor && Instance.m_addsInEditorOnGet) {
 				Add(key);
 				foreach (LocalisationString str in Instance.m_data.m_strings) {
-					if (str.m_default.ToLower() == key.ToLower()) {
+					if (str.m_default == key) {
 						return str.m_current;
 					}
 				}
@@ -122,7 +124,11 @@ public class Localisation : ScriptableObject {
 		return null;
 	}
 
-
+	public void FormatAllDataToLower() {
+		for (int a = 0; a < m_data.m_strings.Count; a++) {
+			m_data.m_strings[a].m_default = m_data.m_strings[a].m_default.ToLower();
+		}
+	}
 
 
 	public void SaveToCSV() {

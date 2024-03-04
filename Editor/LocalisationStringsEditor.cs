@@ -78,6 +78,10 @@ public class LocalisationStringsEditor : EditorWindow {
 		if (GUILayout.Button("Load from Disk")) {
 			Localisation.Instance.LoadDataFromCSV();
 		}
+
+		if (GUILayout.Button("FORMAT TO LOWER")) {
+			Localisation.Instance.FormatAllDataToLower();
+		}
 	}
 
 	private static void ShowEditor() {
