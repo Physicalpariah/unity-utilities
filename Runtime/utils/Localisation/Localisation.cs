@@ -116,7 +116,7 @@ public class Localisation : ScriptableObject {
 		}
 
 		foreach (LocalisationString str in Instance.m_data.m_strings) {
-			if (str.m_default.ToLower() == key.ToLower()) {
+			if (str.m_default == key) {
 				return str.m_current;
 			}
 		}
