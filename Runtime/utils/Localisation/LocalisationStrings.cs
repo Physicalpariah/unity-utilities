@@ -17,7 +17,7 @@ public class LocalisationStrings {
 		foreach (LocalisationString str in m_strings) {
 			if (str != null) {
 				if (string.IsNullOrWhiteSpace(str.m_default) == false) {
-					if (str.m_default.ToLower() == value.ToLower()) {
+					if (str.m_default == value) {
 						return true;
 					}
 				}
