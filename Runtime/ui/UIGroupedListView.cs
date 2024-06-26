@@ -12,6 +12,8 @@ public class UIGroupedListView<T> : UIListView<T> {
 
 	// Properties
 	[SerializeField] protected GameObject m_seperatorPrefab;
+
+	public CoreEvent e_allGroupedItemsSpawned;
 	// Initalisation Functions
 
 	// Unity Callbacks
@@ -26,6 +28,10 @@ public class UIGroupedListView<T> : UIListView<T> {
 				CreateCell(kvp.Key, m_holder.transform, m_seperatorPrefab);
 			}
 			Append(kvp.Value);
+		}
+
+		if (e_allGroupedItemsSpawned != null) {
+			e_allGroupedItemsSpawned();
 		}
 	}
 
