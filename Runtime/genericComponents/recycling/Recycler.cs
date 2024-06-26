@@ -94,11 +94,11 @@ public class Recycler<T> : MonoBehaviour {
 		}
 		else {
 			SpawnInstant(data);
+			if (e_allItemsSpawned != null) {
+				e_allItemsSpawned();
+			}
 		}
 
-		if (e_allItemsSpawned != null) {
-			e_allItemsSpawned();
-		}
 	}
 
 	private void SpawnInstant(List<T> data) {
@@ -112,6 +112,10 @@ public class Recycler<T> : MonoBehaviour {
 		for (int a = 0; a < data.Count; a++) {
 			GameObject cell = CreateCell(data[a]);
 			yield return sec;
+		}
+
+		if (e_allItemsSpawned != null) {
+			e_allItemsSpawned();
 		}
 	}
 
