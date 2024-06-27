@@ -20,13 +20,19 @@ public class GKPinchRecognizer : GKAbstractGestureRecognizer {
 
 
 	internal override void fireRecognizedEvent() {
-		if (gestureRecognizedEvent != null)
+		if (gestureRecognizedEvent != null) {
+			Debug.Log("GKLog: recogniser all geezy, firing");
 			gestureRecognizedEvent(this);
+		}
+		else {
+			Debug.Log("GKLog: recogniser not subscribed, bailing");
+		}
 	}
 
 
 	internal override void touchesBegan(List<GKTouch> touches) {
 		if (state == GKGestureRecognizerState.Possible) {
+			Debug.Log("GKLog: touches began on pinch");
 			// we need to have two touches to work with so we dont set state to Begin until then
 			// latch the touches
 			for (int i = 0; i < touches.Count; i++) {
@@ -40,6 +46,7 @@ public class GKPinchRecognizer : GKAbstractGestureRecognizer {
 			} // end for
 
 			if (_trackingTouches.Count == 2) {
+				Debug.Log("GKLog: two touches detected, we should be good.");
 				deltaScale = 0;
 
 				Debug.Log("1: " + _trackingTouches[0].position);
@@ -48,6 +55,9 @@ public class GKPinchRecognizer : GKAbstractGestureRecognizer {
 				_previousDistance = _intialDistance;
 				state = GKGestureRecognizerState.RecognizedAndStillRecognizing;
 			}
+		}
+		else {
+			Debug.Log("GKLog: state is not possible: " + state);
 		}
 	}
 
