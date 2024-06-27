@@ -107,7 +107,7 @@ public class Recycler<T> : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator DoSpawn(List<T> data) {
+	protected IEnumerator DoSpawn(List<T> data) {
 		WaitForSeconds sec = new(m_spawnIntervalInSeconds);
 		for (int a = 0; a < data.Count; a++) {
 			GameObject cell = CreateCell(data[a]);
