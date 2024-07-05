@@ -17,8 +17,11 @@ public class UIViewController : MonoBehaviour {
 	// Properties
 	public List<IView> m_views;
 	public List<UIConnection> m_connections;
-	public Button m_btnBack;
 	public List<GameObject> m_firstSelectionHeirarchy;
+
+	[Header("Back button")]
+	public Button m_btnBack;
+	public UIViewController m_dedicatedViewBack;
 
 	// Initalisation Functions
 	private void Start() {
@@ -163,7 +166,16 @@ public class UIViewController : MonoBehaviour {
 
 	private void SubBackButton() {
 		if (m_btnBack == null) { return; }
-		UIUtils.SubscribeButton(m_btnBack, m_window.Back);
+		UIUtils.SubscribeButton(m_btnBack, FireBackButton);
+	}
+
+	private void FireBackButton() {
+		if (m_dedicatedViewBack != null) {
+			m_window.Segue(m_dedicatedViewBack);
+		}
+		else {
+			m_window.Back();
+		}
 	}
 }
 
