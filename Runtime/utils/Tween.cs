@@ -66,6 +66,12 @@ public class Tween : MonoBehaviour {
 		c_tweenRoutine = StartCoroutine(DoTween());
 	}
 
+	public void StopTween() {
+		if (c_tweenRoutine != null) {
+			StopCoroutine(c_tweenRoutine);
+		}
+	}
+
 	[ContextMenu("Copy to start")]
 	private void CopyTransformToStartTween() {
 		m_start = CopyTransform();
