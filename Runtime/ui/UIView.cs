@@ -42,6 +42,7 @@ public class UIView : MonoBehaviour, IView {
 
 	public virtual void Close() {
 		gameObject.SetActive(false);
+		Unsubscribe();
 	}
 
 	public virtual void UpdateView() {
@@ -54,7 +55,7 @@ public class UIView : MonoBehaviour, IView {
 	}
 
 	private void OnDestroy() { Unsubscribe(); }
-	private void OnDisable() { Unsubscribe(); }
+	// private void OnDisable() { Unsubscribe(); }
 	private void OnApplicationQuit() { Unsubscribe(); }
 
 	public virtual void Unsubscribe() {
