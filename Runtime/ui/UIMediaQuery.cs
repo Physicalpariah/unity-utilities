@@ -15,7 +15,10 @@ public class UIMediaQuery : MonoBehaviour {
 	// Properties
 
 	public string m_activeQueryName;
+	public List<GameObject> m_targets;
+	public List<MediaQueryTrigger> m_triggers;
 	public List<MediaQuery> m_queries;
+	[HideInInspector] public bool m_modern;
 
 	// Initalisation Functions
 	private void OnEnable() {
@@ -62,8 +65,81 @@ public class UIMediaQuery : MonoBehaviour {
 
 	// Public Functions
 
+	public void ConvertTargets() {
+		m_targets = new();
+		m_triggers = new();
+
+		for (int a = 0; a < m_queries.Count; a++) {
+			if (m_triggers.Contains(m_queries[a].m_trigger) == false) {
+				m_triggers.Add(m_queries[a].m_trigger);
+			}
+		}
+		for (int a = 0; a < m_queries.Count; a++) {
+			for (int b = 0; b < m_queries[a].m_actions.Count; b++) {
+				if (m_targets.Contains(m_queries[a].m_actions[b].m_target) == false) {
+					m_targets.Add(m_queries[a].m_actions[b].m_target);
+				}
+			}
+		}
+
+		SetActions();
+		m_modern = true;
+	}
+
+	public void SetActions() {
+
+		List<MediaQuery> backupQueries = new();
+		for (int a = 0; a < m_queries.Count; a++) {
+			backupQueries.Add(m_queries[a]);
+		}
+
+
+		m_queries.Clear();
+
+
+		for (int b = 0; b < m_triggers.Count; b++) {
+			MediaQuery query = new();
+			query.m_trigger = m_triggers[b];
+			query.m_actions = new();
+			for (int a = 0; a < m_targets.Count; a++) {
+				MediaAction act = new();
+				act.SetTarget(this, a);
+				query.m_actions.Add(act);
+			}
+			m_queries.Add(query);
+		}
+
+		for (int a = 0; a < m_queries.Count; a++) {
+			if (backupQueries.Count > a) {
+				m_queries[a].m_container = backupQueries[a].m_container;
+				for (int b = 0; b < m_queries[a].m_actions.Count; b++) {
+					if (backupQueries[a].m_actions.Count > b) {
+						if (m_queries[a].m_actions[b].m_target == backupQueries[a].m_actions[b].m_target) {
+							m_queries[a].m_actions[b].m_parent = backupQueries[a].m_actions[b].m_parent;
+						}
+					}
+				}
+			}
+		}
+
+		for (int a = 0; a < m_queries.Count; a++) {
+			m_queries[a].m_name = m_queries[a].m_trigger.name;
+		}
+
+#if UNITY_EDITOR
+		UnityEditor.EditorUtility.SetDirty(this);
+#endif
+
+	}
+
+	public GameObject GetTargetByIndex(int id) {
+		return m_targets[id];
+	}
+
 	// Private Functions
 }
+
+
 
 
 [Serializable]
@@ -78,6 +154,7 @@ public class MediaQuery {
 		foreach (MediaAction act in m_actions) {
 			act.Apply();
 		}
+
 	}
 
 	public void Deactivate() {
@@ -87,19 +164,40 @@ public class MediaQuery {
 
 
 [Serializable]
-public struct MediaAction {
+public class MediaAction {
 	public string m_name;
 	public n_mediaActionType m_type;
 	// [Header("Reparenting")]
-	public GameObject m_target;
+
+	[HideInInspector] public GameObject m_target;
 	public GameObject m_parent;
+
+	private GameObject GetTarget() {
+		m_target = m_query.GetTargetByIndex(m_targetID);
+		if (m_target != null) {
+			m_group = m_target.GetComponent<LayoutElement>();
+		}
+		return m_target;
+	}
 	// [Header("Layout Element")]
 	public LayoutElement m_group;
 	public Vector2 m_minSize;
 	public Vector2 m_prefSize;
 	// [Header("Visibility")]
-	public GameObject m_visibilityTarget;
+	// public GameObject m_visibilityTarget;
 	public bool m_isShown;
+
+	private UIMediaQuery m_query;
+	public int m_targetID;
+	public bool m_isModernVersion;
+
+
+	public void SetTarget(UIMediaQuery media, int id) {
+		m_query = media;
+		m_targetID = id;
+		GetTarget();
+		m_isModernVersion = true;
+	}
 
 	public void Apply() {
 		switch (m_type) {
@@ -119,12 +217,15 @@ public struct MediaAction {
 	}
 
 	private void ApplyParenting() {
-		if (m_target == null) { return; }
 		if (m_parent == null) { return; }
+		if (m_group == null) { GetTarget(); }
+		if (m_target == null) { return; }
 		m_target.transform.SetParent(m_parent.transform, false);
 	}
 
 	private void ApplyLayout() {
+		if (m_group == null) { return; }
+		if (m_group == null) { GetTarget(); }
 		if (m_group == null) { return; }
 		m_group.minHeight = m_minSize.y;
 		m_group.minWidth = m_minSize.x;
@@ -133,7 +234,9 @@ public struct MediaAction {
 	}
 
 	private void ApplyVisibility() {
-		m_visibilityTarget.gameObject.SetActive(m_isShown);
+		if (m_group == null) { GetTarget(); }
+		if (m_target == null) { return; }
+		m_target.gameObject.SetActive(m_isShown);
 	}
 }
 

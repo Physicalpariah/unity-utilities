@@ -23,6 +23,7 @@ public class MediaActionEditor : PropertyDrawer {
 		// Find the SerializedProperties by nameF
 		var name = property.FindPropertyRelative("m_name");
 		var action = property.FindPropertyRelative("m_type");
+		var modern = property.FindPropertyRelative("m_isModernVersion");
 		// reparent
 		var target = property.FindPropertyRelative("m_target");
 		var parent = property.FindPropertyRelative("m_parent");
@@ -48,24 +49,55 @@ public class MediaActionEditor : PropertyDrawer {
 
 		switch (actionType) {
 			case (n_mediaActionType.layoutElement): {
-					EditorGUI.PropertyField(firstRect, layout);
-					EditorGUI.PropertyField(secondRect, min);
-					EditorGUI.PropertyField(thirdRect, pref);
-					m_propertyCount = 4;
+					if (modern.boolValue) {
+						ShowTarget(target, firstRect);
+						if (layout.objectReferenceValue == null) {
+							EditorGUI.LabelField(secondRect, "no group");
+							m_propertyCount = 3;
+							break;
+						}
+						else {
+							EditorGUI.PropertyField(secondRect, min);
+							EditorGUI.PropertyField(thirdRect, pref);
+							m_propertyCount = 4;
+						}
+					}
+					else {
+						EditorGUI.PropertyField(firstRect, layout);
+						EditorGUI.PropertyField(secondRect, min);
+						EditorGUI.PropertyField(thirdRect, pref);
+						m_propertyCount = 4;
+					}
 					break;
 				}
 			case (n_mediaActionType.reparent): {
-					EditorGUI.PropertyField(firstRect, target);
+					// SerializedProperty commandsProperty = serializedObject.FindProperty("commands");
+					// property.
+					if (modern.boolValue) {
+						ShowTarget(target, firstRect);
+					}
+					else {
+						EditorGUI.PropertyField(firstRect, target);
+					}
 					EditorGUI.PropertyField(secondRect, parent);
 					m_propertyCount = 3;
 					break;
 				}
 			case (n_mediaActionType.toggleVisibility): {
-					EditorGUI.PropertyField(firstRect, visTarget);
+					ShowTarget(target, firstRect);
 					EditorGUI.PropertyField(secondRect, visShown);
 					m_propertyCount = 3;
 					break;
 				}
+		}
+	}
+
+	private static void ShowTarget(SerializedProperty target, Rect firstRect) {
+		if (target.objectReferenceValue == null) {
+			EditorGUI.LabelField(firstRect, "no target");
+		}
+		else {
+			EditorGUI.LabelField(firstRect, target.objectReferenceValue.name.ToString(), AnchoriteEditorUtils.m_boldStyle);
 		}
 	}
 }

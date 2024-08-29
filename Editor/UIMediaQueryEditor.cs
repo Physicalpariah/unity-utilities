@@ -16,10 +16,29 @@ public class UIMediaQueryEditor : Editor {
 	public override void OnInspectorGUI() {
 		UIMediaQuery handler = (UIMediaQuery)target;
 		DrawDefaultInspector();
+
+		if (handler.m_modern == false) {
+			if (GUILayout.Button("Convert to new system")) {
+				handler.ConvertTargets();
+			}
+		}
+
+		if (GUILayout.Button("apply targets")) {
+			handler.SetActions();
+		}
+
+		AnchoriteEditorUtils.DrawUILine(Color.black);
+
+		DrawSetters(handler);
+
+	}
+
+	private void DrawSetters(UIMediaQuery handler) {
+		if (handler.m_queries == null) { return; }
 		if (handler.m_queries.Count > 0) {
 			GUILayout.Label("Apply Layout:");
-
 			for (int a = 0; a < handler.m_queries.Count; a++) {
+				if (handler.m_queries[a].m_trigger == null) { continue; }
 				if (GUILayout.Button(handler.m_queries[a].m_trigger.name)) {
 
 					if (e_queryWillFire != null) {
@@ -41,9 +60,6 @@ public class UIMediaQueryEditor : Editor {
 					}
 				}
 			}
-
-
-
 		}
 	}
 }
