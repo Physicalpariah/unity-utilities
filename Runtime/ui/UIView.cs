@@ -76,5 +76,6 @@ public enum n_viewType {
 	open_on_open,
 	exclusive,
 	close_on_open,
+	do_nothing,
 }
 

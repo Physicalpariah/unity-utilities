@@ -122,6 +122,9 @@ public class UIViewController : MonoBehaviour {
 						}
 						break;
 					}
+				case (n_viewType.do_nothing): {
+						break;
+					}
 			}
 		}
 
