@@ -24,7 +24,7 @@ public class ScreenSpaceIconHandler : MonoBehaviour {
 
 	public static void SetInstance(ScreenSpaceIconHandler instance) {
 		m_instance = instance;
-		m_instance.Clear();
+		// m_instance.Clear();
 	}
 
 	public static void ClearInstance() {
@@ -92,6 +92,18 @@ public class ScreenSpaceIconHandler : MonoBehaviour {
 			SetInstance(this);
 		}
 
+		if (m_spawnedIcons == null) {
+			m_spawnedIcons = new List<UI_ScreenSpaceIcon>();
+		}
+
+		// Clear();
+	}
+
+	private void OnDestroy() { Unsubscribe(); }
+	private void OnApplicationQuit() { Unsubscribe(); }
+
+	private void Unsubscribe() {
+		m_instance = null;
 		Clear();
 	}
 
@@ -119,9 +131,7 @@ public class ScreenSpaceIconHandler : MonoBehaviour {
 	// Private Functions
 	private void Clear() {
 
-		if (m_spawnedIcons == null) {
-			m_spawnedIcons = new List<UI_ScreenSpaceIcon>();
-		}
+
 
 		for (int a = 0; a < m_spawnedIcons.Count; a++) {
 			RemoveIcon(m_spawnedIcons[a]);
