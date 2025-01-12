@@ -35,31 +35,38 @@ public class RecycleablePrefabContainer {
 		}
 	}
 
-	// Public Functions
+		// Public Functions
 	public Recyclable GetRecycleable(GameObject prefab) {
 		// 1)
-		// if we've maxxed out our items, and don't have one to recyle, recycle an active one.		
+		// if we've maxxed out our items, and don't have one to recyle, recycle an active one.	
+		Recyclable rec = null;
 		if (m_rawSpawns >= m_maxSpawns && m_inactiveItems.Count == 0) {
-			return GetExistingActiveItem();
+			rec = GetExistingActiveItem();
 		}
 
 		// 2)
 		// if we have inactive items, grab the first one that isn't null.
-		if (m_inactiveItems.Count > 0) {
-			return GetInactiveItem();
+		if (rec == null) {
+			if (m_inactiveItems.Count > 0) {
+				rec = GetInactiveItem();
+			}
 		}
 
 		// 2.1) if we've maxed out spawns, and we care about balance, and there's no inactive items, and we haven't yet got an item, we're in trouble.
-		if (m_rawSpawns >= m_maxSpawns + 1) {
-			if (m_spawnedItems[0].m_recycleData.m_caresAboutInitBalance) {
-				Debug.LogError("no inactive items for prefab:" + prefab.name);
+		if (rec == null) {
+			if (m_rawSpawns >= m_maxSpawns + 1) {
+				if (m_spawnedItems[0].m_recycleData.m_caresAboutInitBalance) {
+					Debug.LogError("no inactive items for prefab:" + prefab.name);
+				}
 			}
 		}
 
 		// 3)
 		// if all of the above is not correct, create a new prefab.
-
-		return CreateNewItem(prefab); ;
+		if (rec == null) {
+			rec = CreateNewItem(prefab);
+		}
+		return rec;
 	}
 
 	public void DeactivateRecycleable(GameObject prefab) {
