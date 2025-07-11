@@ -78,7 +78,7 @@ public class Localisation : ScriptableObject {
 	public static string Search(string key) {
 		for (int a = 0; a < Instance.m_data.m_strings.Count; a++) {
 			LocalisationString data = Instance.m_data.m_strings[a];
-			if (data.m_default.Contains(key.ToLower())) {
+			if (data.m_default.Contains(key.ToLowerInvariant())) {
 				return data.m_default;
 			}
 		}
@@ -91,7 +91,7 @@ public class Localisation : ScriptableObject {
 		List<string> results = new();
 		for (int a = 0; a < Instance.m_data.m_strings.Count; a++) {
 			LocalisationString data = Instance.m_data.m_strings[a];
-			if (data.m_default.ToLower().Contains(key.ToLower())) {
+			if (data.m_default.ToLowerInvariant().Contains(key.ToLowerInvariant())) {
 				results.Add(data.m_default);
 			}
 		}
