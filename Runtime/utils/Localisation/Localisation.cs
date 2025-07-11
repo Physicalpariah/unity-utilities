@@ -102,10 +102,20 @@ public class Localisation : ScriptableObject {
 
 	// NOTE: !!IMPORTANT!! for performance reasons all string keys must be stored in lower.
 	public static string Get(string key) {
+		// turkish i fix.
+		if (Localisation.Instance.m_currentLanguage == SystemLanguage.English) {
+			if (key.Contains('ı')) {
+				key = key.Replace('ı', 'i');
+			}
+		}
+
 		if (Instance.m_data.Contains(key) == false) {
 			if (Application.platform == RuntimePlatform.OSXEditor && Instance.m_addsInEditorOnGet) {
 				Add(key);
 				foreach (LocalisationString str in Instance.m_data.m_strings) {
+
+
+
 					if (str.m_default == key) {
 						return str.m_current;
 					}
@@ -126,7 +136,7 @@ public class Localisation : ScriptableObject {
 
 	public void FormatAllDataToLower() {
 		for (int a = 0; a < m_data.m_strings.Count; a++) {
-			m_data.m_strings[a].m_default = m_data.m_strings[a].m_default.ToLower();
+			m_data.m_strings[a].m_default = m_data.m_strings[a].m_default.ToLowerInvariant();
 		}
 	}
 
